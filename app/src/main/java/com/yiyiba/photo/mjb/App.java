@@ -28,7 +28,7 @@ public class App extends Application {
         mAppContext = getApplicationContext();
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
-        //Bmob.initialize(this,"d998bb416d0969dd6db8f47a8b32c903");
+        Bmob.initialize(this,"c140eee577aedd9dbe4011c1b016e425");
 
     }
 

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yiyiba.photo.ui.activity.RegisterActivity">
+
+    <include layout="@layout/item_titlebar_layout"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/et_register_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入手机号"
+                    android:drawableLeft="@mipmap/icon_username"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:drawablePadding="5dp"
+                    android:inputType="phone"
+                    android:lines="1"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/gray"
+                    android:layout_below="@id/et_register_username"
+                    />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/et_register_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入密码"
+                    android:drawableLeft="@mipmap/icon_password"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:drawablePadding="5dp"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/gray"
+                    android:layout_below="@id/et_register_password"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/et_register_nick"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="给自己起个昵称"
+                    android:drawableLeft="@mipmap/icon_nick"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:drawablePadding="5dp"
+                    android:inputType="text"
+                    android:lines="1"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/gray"
+                    android:layout_below="@id/et_register_nick"
+                    />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="注 册"
+                android:textSize="16sp"
+                android:background="@drawable/selector_btn_bg"
+                android:layout_marginTop="60dp"/>
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="118图库"
+            android:layout_centerHorizontal="true"
+            android:textSize="12sp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"/>
+    </RelativeLayout>
+
+</LinearLayout>

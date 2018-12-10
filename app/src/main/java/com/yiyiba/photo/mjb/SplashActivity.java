@@ -23,6 +23,7 @@ import com.yiyiba.photo.R;
 import com.google.gson.Gson;
 import com.maning.updatelibrary.InstallUtils;
 import com.squareup.okhttp.Request;
+import com.yiyiba.photo.ui.activity.MainActivity;
 
 import org.json.JSONObject;
 
@@ -63,9 +64,9 @@ public class SplashActivity extends Activity {
      */
     private void requestNetwork() {
 
-        // String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=xg20201101";
-        String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=ttd000";
-        //String url = "http://www.513901.com/back/get_init_data.php?type=android&appid=xg2019";
+        //String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=xg90080";
+        String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=1212";
+        //String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=ttd000";  //已打开接口的id
         Map verif = new HashMap<String, String>();
 
         OkHttpClientManager.getInstance().postAsyn(url, new OkHttpClientManager.ResultCallback<String>() {
