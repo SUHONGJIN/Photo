@@ -13,7 +13,7 @@
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@mipmap/ic_launcher_foreground"
+        android:src="@mipmap/icon_collect"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"/>
 
@@ -112,7 +112,7 @@
                     android:id="@+id/tv_to_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="现在注册"
+                    android:text="注册新账号"
                     android:layout_marginLeft="10dp"
                     android:textSize="14sp"/>
             </LinearLayout>

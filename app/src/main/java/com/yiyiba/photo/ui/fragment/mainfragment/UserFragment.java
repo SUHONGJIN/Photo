@@ -1,5 +1,7 @@
 package com.yiyiba.photo.ui.fragment.mainfragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +11,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yiyiba.photo.R;
+import com.yiyiba.photo.bean.User;
+import com.yiyiba.photo.ui.activity.AboutActivity;
+import com.yiyiba.photo.ui.activity.CollectActivity;
+import com.yiyiba.photo.ui.activity.FeedBackActivity;
+import com.yiyiba.photo.ui.activity.LikeActivity;
 import com.yiyiba.photo.ui.activity.LoginActivity;
+import com.yiyiba.photo.ui.activity.MainActivity;
+import com.yiyiba.photo.ui.activity.SettingActivity;
+import com.yiyiba.photo.utlis.ActivityCollector;
 import com.yiyiba.photo.view.ItemView;
 
+import cn.bmob.v3.BmobUser;
 import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
@@ -38,7 +50,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
+
         initView(view);
+
         initData();
         return view;
     }
@@ -70,42 +84,82 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private void initData() {
 
         Glide.with(getContext())
-                .load("http://img1.imgtn.bdimg.com/it/u=789661362,2109010345&fm=200&gp=0.jpg")
+                .load("http://p0.so.qhmsg.com/bdr/1080__/t019706030483cc8cbf.jpg")
                 .bitmapTransform(new BlurTransformation(getContext(), 8, 5))
                 .error(R.drawable.bg_image)
                 .into(mImage);
         Glide.with(getContext())
-                .load("http://img1.imgtn.bdimg.com/it/u=789661362,2109010345&fm=200&gp=0.jpg")
+                .load("http://img1.cache.netease.com/catchpic/4/49/49005475A2858D225CB09C74694C333A.jpg")
                 .error(R.drawable.bg_image)
                 .into(civ_head);
+
+        if (BmobUser.isLogin()) {
+            User user = BmobUser.getCurrentUser(User.class);
+            if (user.getNick()!=null){
+                tv_user_name.setText(user.getNick());
+                my_item6.setVisibility(View.VISIBLE);
+            }
+        } else {
+            Toast.makeText(getContext(),"尚未登录",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.civ_user_head:
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                if (!BmobUser.isLogin()){
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                }else {
+                    Toast.makeText(getContext(),"头像不支持更换",Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.tv_user_name:
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                if (!BmobUser.isLogin()){
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                }
                 break;
             case R.id.my_item1:
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                startActivity(new Intent(getContext(), CollectActivity.class));
                 break;
             case R.id.my_item2:
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                startActivity(new Intent(getContext(), LikeActivity.class));
                 break;
             case R.id.my_item3:
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                startActivity(new Intent(getContext(), SettingActivity.class));
                 break;
             case R.id.my_item4:
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                startActivity(new Intent(getContext(), FeedBackActivity.class));
                 break;
             case R.id.my_item5:
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                startActivity(new Intent(getContext(), AboutActivity.class));
                 break;
             case R.id.my_item6:
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle("温馨提示您:");
+                dialog.setMessage("即将退出登录啦！");
+                dialog.setNegativeButton("好的", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //退出登录，同时清除缓存用户对象。
+                        BmobUser.logOut();
+                        //退出APP
+                        ActivityCollector.removeAllActivity();
+                        //跳转到主页面
+                        startActivity(new Intent(getContext(), MainActivity.class));
+
+                        Toast.makeText(getContext(),"已退出登录",Toast.LENGTH_LONG).show();
+                    }
+                });
+                dialog.setNeutralButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                dialog.show();
+
                 break;
 
         }

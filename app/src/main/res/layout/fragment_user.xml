@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -115,6 +115,7 @@
                 android:gravity="center"
                 app:setIcon="@mipmap/icon_exit"
                 android:layout_marginLeft="2dp"
+                android:visibility="invisible"
                 app:setText="@string/item_name6"/>
         </LinearLayout>
 
