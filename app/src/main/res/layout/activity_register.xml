@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context="com.yiyiba.photo.ui.activity.RegisterActivity">
 
     <include layout="@layout/item_titlebar_layout"/>
@@ -101,10 +102,12 @@
             <Button
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
-                android:layout_height="40sp"
+                android:layout_height="45sp"
                 style="?android:attr/borderlessButtonStyle"
                 android:text="注 册"
                 android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/selector_btn_bg"
                 android:layout_marginTop="60dp"/>
 

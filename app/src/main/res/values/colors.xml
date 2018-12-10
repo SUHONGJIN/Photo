@@ -36,7 +36,7 @@
     <color name="result_points">#c000ff00</color>
     <color name="result_text">#ffffffff</color>
     <color name="result_view">#b0000000</color>
-    <color name="sbc_header_text">#ff808080</color>
+    <color name="default_text">#8A8A88</color>
     <color name="sbc_header_view">#ffffffff</color>
     <color name="sbc_list_item">#fffff0e0</color>
     <color name="sbc_layout_view">#ffffffff</color>
@@ -75,6 +75,7 @@
     <color name="orange">#FFA500</color><!--橙色 -->
     <color name="lightsalmon">#FFA07A</color><!--亮肉色 -->
     <color name="darkorange">#FF8C00</color><!--暗桔黄色 -->
+    <color name="orange_main">#FFC442</color><!--黄色 -->
     <color name="coral">#FF7F50</color><!--珊瑚色 -->
     <color name="hotpink">#FF69B4</color><!--热粉红色 -->
     <color name="tomato">#FF6347</color><!--西红柿色 -->
