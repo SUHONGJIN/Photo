@@ -15,6 +15,7 @@ import com.yiyiba.photo.common.BaseActivity;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import es.dmoral.toasty.Toasty;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
@@ -63,19 +64,19 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         // validate
         String username = et_register_username.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+            Toasty.warning(RegisterActivity.this, "请输入手机号", Toast.LENGTH_SHORT, true).show();
             return;
         }
 
         String password = et_register_password.getText().toString().trim();
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
+            Toasty.warning(RegisterActivity.this, "请输入密码", Toast.LENGTH_SHORT, true).show();
             return;
         }
 
         String nick = et_register_nick.getText().toString().trim();
         if (TextUtils.isEmpty(nick)) {
-            Toast.makeText(this, "请输入昵称", Toast.LENGTH_SHORT).show();
+            Toasty.warning(RegisterActivity.this, "请输入昵称", Toast.LENGTH_SHORT, true).show();
             return;
         }
 
@@ -96,10 +97,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void done(User user, BmobException e) {
                 if (e == null) {
-                    Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
+                    Toasty.success(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT, true).show();
                     finish();
                 } else {
-                    Toast.makeText(RegisterActivity.this, "用户名或已存在！", Toast.LENGTH_LONG).show();
+                    Toasty.error(RegisterActivity.this, "用户名或已存在!", Toast.LENGTH_SHORT, true).show();
                 }
             }
         });

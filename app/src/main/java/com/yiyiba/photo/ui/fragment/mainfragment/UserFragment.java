@@ -28,6 +28,7 @@ import com.yiyiba.photo.view.ItemView;
 
 import cn.bmob.v3.BmobUser;
 import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
@@ -82,16 +83,16 @@ public class UserFragment extends Fragment implements View.OnClickListener {
      * 初始化
      */
     private void initData() {
-
-        Glide.with(getContext())
-                .load("http://p0.so.qhmsg.com/bdr/1080__/t019706030483cc8cbf.jpg")
-                .bitmapTransform(new BlurTransformation(getContext(), 8, 5))
-                .error(R.drawable.bg_image)
-                .into(mImage);
-        Glide.with(getContext())
-                .load("http://img1.cache.netease.com/catchpic/4/49/49005475A2858D225CB09C74694C333A.jpg")
-                .error(R.drawable.bg_image)
-                .into(civ_head);
+//        String url = "http://p0.so.qhmsg.com/bdr/1080__/t019706030483cc8cbf.jpg";
+//        Glide.with(getContext())
+//                .load(url)
+//                .bitmapTransform(new BlurTransformation(getContext(), 8, 5))
+//                .error(R.drawable.bg_image)
+//                .into(mImage);
+//        Glide.with(getContext())
+//                .load(url)
+//                .error(R.mipmap.icon_user_head)
+//                .into(civ_head);
 
         if (BmobUser.isLogin()) {
             User user = BmobUser.getCurrentUser(User.class);
@@ -100,7 +101,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 my_item6.setVisibility(View.VISIBLE);
             }
         } else {
-            Toast.makeText(getContext(),"尚未登录",Toast.LENGTH_LONG).show();
+            Toasty.info(getContext(), "尚未登录!", Toast.LENGTH_SHORT, true).show();
         }
 
     }
@@ -112,7 +113,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 if (!BmobUser.isLogin()){
                     startActivity(new Intent(getContext(), LoginActivity.class));
                 }else {
-                    Toast.makeText(getContext(),"头像不支持更换",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"头像暂时不支持更换",Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.tv_user_name:
@@ -138,8 +139,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             case R.id.my_item6:
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                 dialog.setTitle("温馨提示您:");
-                dialog.setMessage("即将退出登录啦！");
-                dialog.setNegativeButton("好的", new DialogInterface.OnClickListener() {
+                dialog.setMessage("即将退出登录！");
+                dialog.setNegativeButton("果断退出", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //退出登录，同时清除缓存用户对象。
@@ -148,11 +149,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                         ActivityCollector.removeAllActivity();
                         //跳转到主页面
                         startActivity(new Intent(getContext(), MainActivity.class));
-
-                        Toast.makeText(getContext(),"已退出登录",Toast.LENGTH_LONG).show();
+                        Toasty.success(getContext(),"退出登录成功",Toast.LENGTH_SHORT,true).show();
                     }
                 });
-                dialog.setNeutralButton("取消", new DialogInterface.OnClickListener() {
+                dialog.setNeutralButton("取消退出", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -161,6 +161,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 dialog.show();
 
                 break;
+
+                default:break;
 
         }
     }

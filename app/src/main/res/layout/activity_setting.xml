@@ -4,8 +4,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.yiyiba.photo.ui.activity.SettingActivity">
 
     <include layout="@layout/item_titlebar_layout"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_item1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_selector_itemview"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_item1"
+            android:paddingLeft="15dp"
+            android:textSize="15sp"
+            android:textColor="@color/black2"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/icon_right"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_item2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_selector_itemview"
+        android:layout_marginTop="1dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_item2"
+            android:paddingLeft="15dp"
+            android:textSize="15sp"
+            android:textColor="@color/black2"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/icon_right"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_item3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_selector_itemview"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_item3"
+            android:paddingLeft="15dp"
+            android:textSize="15sp"
+            android:textColor="@color/black2"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/icon_right"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_item4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_selector_itemview"
+        android:layout_marginTop="1dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_item4"
+            android:paddingLeft="15dp"
+            android:textSize="15sp"
+            android:textColor="@color/black2"
+            android:layout_centerVertical="true"/>
+        <Switch
+            android:id="@+id/mSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_item5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_selector_itemview"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_item5"
+            android:paddingLeft="15dp"
+            android:textSize="15sp"
+            android:textColor="@color/black2"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/icon_right"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_item6"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_selector_itemview"
+        android:layout_marginTop="1dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_item6"
+            android:paddingLeft="15dp"
+            android:textSize="15sp"
+            android:textColor="@color/black2"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/icon_right"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"/>
+    </RelativeLayout>
 
 </LinearLayout>

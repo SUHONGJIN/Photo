@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yiyiba.photo.R;
-import com.yiyiba.photo.bean.Photo1;
+import com.yiyiba.photo.bean.Photo3;
+import com.yiyiba.photo.bean.Photo4;
 import com.yiyiba.photo.ui.activity.ShowImageActivity;
 
 import java.util.ArrayList;
@@ -24,12 +25,12 @@ import java.util.List;
  * Created by SuHongJin on 2018/12/10.
  */
 
-public class Photo1Adapter extends RecyclerView.Adapter<Photo1Adapter.ViewHolder>{
-    private List<Photo1> photo1List = new ArrayList<>();
+public class Photo4Adapter extends RecyclerView.Adapter<Photo4Adapter.ViewHolder>{
+    private List<Photo4> photo4List=new ArrayList<>();
     private Context context;
 
-    public Photo1Adapter(List<Photo1> photo1,Context context){
-        this.photo1List = photo1;
+    public Photo4Adapter(List<Photo4> photo4, Context context){
+        this.photo4List = photo4;
         this.context=context;
     }
 
@@ -45,14 +46,14 @@ public class Photo1Adapter extends RecyclerView.Adapter<Photo1Adapter.ViewHolder
 
         final int position=viewHolder.getAdapterPosition();
 
-        viewHolder.tv_photo.setText(photo1List.get(i).getImageTitle());
-        Glide.with(context).load(photo1List.get(i).getImageUrl()).into(viewHolder.iv_photo);
+        viewHolder.tv_photo.setText(photo4List.get(i).getImageTitle4());
+        Glide.with(context).load(photo4List.get(i).getImageUrl4()).into(viewHolder.iv_photo);
         //点击事件
         viewHolder.ll_photo_itemview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ShowImageActivity.class);
-                intent.putExtra("image_url",photo1List.get(position).getImageUrl());
+                intent.putExtra("image_url",photo4List.get(position).getImageUrl4());
                 context.startActivity(intent);
             }
         });
@@ -60,7 +61,7 @@ public class Photo1Adapter extends RecyclerView.Adapter<Photo1Adapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return photo1List.size();
+        return photo4List.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

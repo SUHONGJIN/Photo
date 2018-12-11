@@ -44,10 +44,10 @@ public class PhotoFragment extends Fragment {
 
         //标题集合
         titles=new ArrayList<>();
-        titles.add("摄影");
-        titles.add("文化");
+        titles.add("风光");
+        titles.add("旅行");
+        titles.add("纪实");
         titles.add("生活");
-        titles.add("风景");
         //碎片集合
         fragments = new ArrayList<>();
         fragments.add(new Fragment1());
@@ -86,3 +86,5 @@ public class PhotoFragment extends Fragment {
         }
     }
 }
+
+

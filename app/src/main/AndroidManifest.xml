@@ -58,7 +58,8 @@
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".ui.activity.AboutActivity" />
         <activity android:name=".ui.activity.CollectActivity" />
-        <activity android:name=".ui.activity.LikeActivity"></activity>
+        <activity android:name=".ui.activity.LikeActivity" />
+        <activity android:name=".ui.activity.ModifyUserDataActivity"></activity>
     </application>
 
 </manifest>

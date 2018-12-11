@@ -8,6 +8,7 @@ import cn.bmob.v3.BmobObject;
 
 public class Photo1 extends BmobObject {
     private String imageUrl;
+    private String imageTitle;
 
     public String getImageUrl() {
         return imageUrl;
@@ -25,5 +26,5 @@ public class Photo1 extends BmobObject {
         this.imageTitle = imageTitle;
     }
 
-    private String imageTitle;
+
 }

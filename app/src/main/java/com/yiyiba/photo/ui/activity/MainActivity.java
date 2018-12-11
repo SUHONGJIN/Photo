@@ -1,5 +1,6 @@
 package com.yiyiba.photo.ui.activity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,7 +17,9 @@ import com.yiyiba.photo.ui.fragment.mainfragment.UserFragment;
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
-    private Fragment fg_photo, fg_classify, fg_user;
+    private PhotoFragment fg_photo;
+    private ClassifyFragment fg_classify;
+    private UserFragment fg_user;
     private FrameLayout fl_content;
     private RadioButton rb_photo;
     private RadioButton rb_classify;
@@ -27,6 +30,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //强制竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initView();
 
     }
@@ -89,6 +94,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
      * @param fragmentTransaction
      */
     private void hideAllFragment(FragmentTransaction fragmentTransaction){
+        if (fragmentTransaction == null){
+            return;
+        }
         if (fg_photo!=null){
             fragmentTransaction.hide(fg_photo);
         }

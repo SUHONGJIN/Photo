@@ -3,7 +3,15 @@
     <string name="item_name1">收藏的作品</string>
     <string name="item_name2">喜欢的作品</string>
     <string name="item_name3">我的设置</string>
-    <string name="item_name4">吐槽与反馈</string>
+    <string name="item_name4">吐槽与建议</string>
     <string name="item_name5">关于APP</string>
     <string name="item_name6">退出登录</string>
+
+
+    <string name="setting_item1">修改昵称</string>
+    <string name="setting_item2">修改密码</string>
+    <string name="setting_item3">我的下载</string>
+    <string name="setting_item4">消息推送</string>
+    <string name="setting_item5">清除缓存</string>
+    <string name="setting_item6">版本升级</string>
 </resources>

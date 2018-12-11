@@ -17,6 +17,7 @@ import com.yiyiba.photo.utlis.ActivityCollector;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import es.dmoral.toasty.Toasty;
 
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
@@ -72,13 +73,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         // validate
         String username = et_login_username.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+            Toasty.warning(LoginActivity.this, "请输入手机号", Toast.LENGTH_SHORT, true).show();
             return;
         }
 
         String password = et_login_password.getText().toString().trim();
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
+            Toasty.warning(LoginActivity.this, "请输入密码", Toast.LENGTH_SHORT, true).show();
             return;
         }
         //开始登录
@@ -96,11 +97,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void done(User bmobUser, BmobException e) {
                 if (e == null) {
-                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
+                    Toasty.success(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT, true).show();
                     ActivityCollector.removeAllActivity();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 } else {
-                    Toast.makeText(LoginActivity.this, "账号或密码错误！", Toast.LENGTH_LONG).show();
+                    Toasty.error(LoginActivity.this, "账号或密码错误!", Toast.LENGTH_SHORT, true).show();
                 }
             }
         });

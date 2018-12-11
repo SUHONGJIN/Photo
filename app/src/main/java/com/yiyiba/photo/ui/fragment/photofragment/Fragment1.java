@@ -43,7 +43,6 @@ public class Fragment1 extends Fragment {
     private void initView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.mRecyclerView);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
     }

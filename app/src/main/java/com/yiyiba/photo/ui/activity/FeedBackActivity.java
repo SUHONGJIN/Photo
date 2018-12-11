@@ -18,6 +18,7 @@ import com.yiyiba.photo.common.BaseActivity;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import es.dmoral.toasty.Toasty;
 
 public class FeedBackActivity extends BaseActivity implements View.OnClickListener {
 
@@ -37,7 +38,7 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
         tv_title = (TextView) findViewById(R.id.tv_title);
         et_feedback = (EditText) findViewById(R.id.et_feedback);
         btn_commit_feedback = (Button) findViewById(R.id.btn_commit_feedback);
-        tv_title.setText("吐槽与反馈");
+        tv_title.setText("吐槽与建议");
         btn_commit_feedback.setOnClickListener(this);
         iv_back = (ImageView) findViewById(R.id.iv_back);
         iv_back.setOnClickListener(this);
@@ -58,13 +59,15 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
     private void submit() {
         // validate
         String feedback = et_feedback.getText().toString().trim();
-        if (TextUtils.isEmpty(feedback)) {
-            Toast.makeText(this, "请吐槽和反馈信息！", Toast.LENGTH_SHORT).show();
+
+        if (!BmobUser.isLogin()){
+            Toasty.info(FeedBackActivity.this, "请先登录再反馈", Toast.LENGTH_SHORT, true).show();
+            startActivity(new Intent(FeedBackActivity.this,LoginActivity.class));
             return;
         }
-        if (!BmobUser.isLogin()){
-            Toast.makeText(this, "请先登录再反馈。", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(FeedBackActivity.this,LoginActivity.class));
+
+        if (TextUtils.isEmpty(feedback)) {
+            Toasty.warning(FeedBackActivity.this, "请输入要吐槽和建议的内容！", Toast.LENGTH_SHORT, true).show();
             return;
         }
         if (BmobUser.isLogin()) {
@@ -92,10 +95,10 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void done(String s, BmobException e) {
                 if (e==null){
-                    Toast.makeText(FeedBackActivity.this,"反馈成功",Toast.LENGTH_LONG).show();
+                    Toasty.success(FeedBackActivity.this,"反馈成功！",Toast.LENGTH_SHORT, true).show();
                     finish();
                 }else {
-                    Toast.makeText(FeedBackActivity.this,"反馈失败啦",Toast.LENGTH_LONG).show();
+                    Toasty.error(FeedBackActivity.this, "反馈失败，请检查网络!", Toast.LENGTH_SHORT, true).show();
                 }
             }
         });
