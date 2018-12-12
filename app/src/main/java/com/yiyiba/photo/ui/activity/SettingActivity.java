@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.yiyiba.photo.R;
 import com.yiyiba.photo.common.BaseActivity;
 
+import cn.bmob.v3.BmobUser;
 import es.dmoral.toasty.Toasty;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
@@ -59,6 +60,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         rl_setting_item6.setOnClickListener(this);
         mSwitch = (Switch) findViewById(R.id.mSwitch);
         mSwitch.setOnClickListener(this);
+
+        if (!BmobUser.isLogin()){
+            rl_setting_item1.setVisibility(View.GONE);
+            rl_setting_item2.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -77,7 +84,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(intent1);
                 break;
             case R.id.rl_setting_item3:
-                Toasty.success(SettingActivity.this, "清除缓存成功3", Toast.LENGTH_SHORT).show();
+                Toasty.success(SettingActivity.this, "暂时无下载内容", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rl_setting_item4:
                 boolean isChecked = mSwitch.isChecked();
@@ -97,4 +104,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
         }
     }
+
+
 }

@@ -59,7 +59,9 @@
         <activity android:name=".ui.activity.AboutActivity" />
         <activity android:name=".ui.activity.CollectActivity" />
         <activity android:name=".ui.activity.LikeActivity" />
-        <activity android:name=".ui.activity.ModifyUserDataActivity"></activity>
+        <activity android:name=".ui.activity.ModifyUserDataActivity" />
+        <activity android:name=".ui.activity.WelcomeGuideActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -25,11 +25,15 @@ import com.google.gson.Gson;
 import com.maning.updatelibrary.InstallUtils;
 import com.squareup.okhttp.Request;
 import com.yiyiba.photo.ui.activity.MainActivity;
+import com.yiyiba.photo.ui.activity.WelcomeGuideActivity;
+import com.yiyiba.photo.utlis.SharedPreferencesUtils;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class SplashActivity extends Activity {
@@ -133,10 +137,27 @@ public class SplashActivity extends Activity {
      * 自己的页面
      */
     private void goToMain() {
-        Intent intent = new Intent(this, MainActivity.class);
-        SystemClock.sleep(500);
-        startActivity(intent);
-        finish();
+        /**
+         * 定时器，作用于延时页面跳转
+         */
+        Timer timer=new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                //如果不是第一次启动应用（true），则直接跳转到主页
+                if (SharedPreferencesUtils.getWelcomeGuideBoolean(getBaseContext())){
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    finish();  //销毁此活动
+                }else {
+                    //如果是第一次启动APP，则跳转到欢迎指南页面，同时设置用户偏好为true
+                    startActivity(new Intent(SplashActivity.this,WelcomeGuideActivity.class));
+                    SharedPreferencesUtils.putWelcomeGuideBoolean(getBaseContext(),true);
+                    finish();
+                }
+
+            }
+        },1000);//表示延时3秒进行跳转
     }
     /**
      * 去网页

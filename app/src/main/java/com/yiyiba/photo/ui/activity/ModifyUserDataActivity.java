@@ -1,7 +1,9 @@
 package com.yiyiba.photo.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.yiyiba.photo.R;
 import com.yiyiba.photo.bean.User;
 import com.yiyiba.photo.common.BaseActivity;
+import com.yiyiba.photo.utlis.ActivityCollector;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -98,22 +101,8 @@ public class ModifyUserDataActivity extends BaseActivity implements View.OnClick
             Toast.makeText(this, "请输入昵称", Toast.LENGTH_SHORT).show();
             return;
         }
-        BmobUser bmobUser = new BmobUser();
-        User user = new User();
-        user.setNick(nick);
-        user.update(bmobUser.getObjectId(), new UpdateListener() {
-            @Override
-            public void done(BmobException e) {
-                if(e==null){
-                    Toasty.success(ModifyUserDataActivity.this, "昵称修改成功", Toast.LENGTH_SHORT, true).show();
-                   finish();
-                }else{
-                    Toasty.error(ModifyUserDataActivity.this, "昵称修改失败", Toast.LENGTH_SHORT, true).show();
-                }
-            }
 
-        });
-
+        updateNick(nick);
     }
     private void submitPassword() {
 
@@ -130,7 +119,45 @@ public class ModifyUserDataActivity extends BaseActivity implements View.OnClick
         }
 
         // TODO validate success, do something
+        updatePassword(password_old, password_new);
+    }
 
+    /**
+     * 更新用户昵称并同步更新本地的用户信息
+     */
+    private void updateNick(String nick) {
+        final User user = BmobUser.getCurrentUser(User.class);
+        user.setNick(nick);
+        user.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    Toasty.success(ModifyUserDataActivity.this, "昵称修改成功", Toast.LENGTH_SHORT, true).show();
+                    finish();
+                } else {
+                    Toasty.error(ModifyUserDataActivity.this, "昵称修改失败。", Toast.LENGTH_SHORT, true).show();
+                }
+            }
+        });
+    }
 
+    /**
+     * 提供旧密码修改密码
+     */
+    private void updatePassword(String oldPwd, String newPwd) {
+        //TODO 此处替换为你的旧密码和新密码
+        BmobUser.updateCurrentUserPassword(oldPwd, newPwd, new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    Toasty.success(ModifyUserDataActivity.this, "密码修改成功，请重新登录。", Toast.LENGTH_SHORT, true).show();
+                    ActivityCollector.removeAllActivity();
+                    BmobUser.logOut();
+                    startActivity(new Intent(ModifyUserDataActivity.this,LoginActivity.class));
+                } else {
+                    Toasty.error(ModifyUserDataActivity.this, "密码修改失败。", Toast.LENGTH_SHORT, true).show();
+                }
+            }
+        });
     }
 }

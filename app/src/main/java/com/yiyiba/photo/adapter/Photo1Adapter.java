@@ -46,7 +46,7 @@ public class Photo1Adapter extends RecyclerView.Adapter<Photo1Adapter.ViewHolder
         final int position=viewHolder.getAdapterPosition();
 
         viewHolder.tv_photo.setText(photo1List.get(i).getImageTitle());
-        Glide.with(context).load(photo1List.get(i).getImageUrl()).into(viewHolder.iv_photo);
+        Glide.with(context).load(photo1List.get(i).getImageUrl()).placeholder(R.drawable.bg_default_image).into(viewHolder.iv_photo);
         //点击事件
         viewHolder.ll_photo_itemview.setOnClickListener(new View.OnClickListener() {
             @Override
