@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yiyiba.photo.R;
-import com.yiyiba.photo.adapter.Photo3Adapter;
 import com.yiyiba.photo.adapter.Photo4Adapter;
-import com.yiyiba.photo.bean.Photo3;
 import com.yiyiba.photo.bean.Photo4;
 
 import java.util.List;
@@ -27,6 +29,8 @@ import cn.bmob.v3.listener.FindListener;
 
 public class Fragment4 extends Fragment {
     private RecyclerView mRecyclerView4;
+    private SmartRefreshLayout refreshLayout;
+    private Photo4Adapter adapter;
 
     @Nullable
     @Override
@@ -39,8 +43,9 @@ public class Fragment4 extends Fragment {
 
     private void initView(View view) {
         mRecyclerView4 = (RecyclerView) view.findViewById(R.id.mRecyclerView4);
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView4.setLayoutManager(layoutManager);
+        refreshLayout = (SmartRefreshLayout) view.findViewById(R.id.refreshLayout);
     }
 
     private void initData() {
@@ -50,12 +55,30 @@ public class Fragment4 extends Fragment {
         bmobQuery.findObjects(new FindListener<Photo4>() {
             @Override
             public void done(List<Photo4> object, BmobException e) {
-                if(e==null){
-                    Photo4Adapter adapter = new Photo4Adapter(object,getContext());
+                if (e == null) {
+                    adapter = new Photo4Adapter(object, getContext());
                     mRecyclerView4.setAdapter(adapter);
-                }else{
+                } else {
 
                 }
+            }
+        });
+
+
+        //下拉刷新
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                adapter.notifyDataSetChanged();  //通知适配器数据改变
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+        //上拉刷新
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshlayout) {
+                adapter.notifyDataSetChanged();  //通知适配器数据改变
+                refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
             }
         });
 
