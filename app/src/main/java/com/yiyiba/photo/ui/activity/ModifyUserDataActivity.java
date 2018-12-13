@@ -98,7 +98,7 @@ public class ModifyUserDataActivity extends BaseActivity implements View.OnClick
 
         String nick = et_nick.getText().toString().trim();
         if (TextUtils.isEmpty(nick)) {
-            Toast.makeText(this, "请输入昵称", Toast.LENGTH_SHORT).show();
+            Toasty.warning(ModifyUserDataActivity.this, "请输入昵称", Toast.LENGTH_SHORT, true).show();
             return;
         }
 
@@ -108,13 +108,13 @@ public class ModifyUserDataActivity extends BaseActivity implements View.OnClick
 
         String password_old = et_password_old.getText().toString().trim();
         if (TextUtils.isEmpty(password_old)) {
-            Toast.makeText(this, "请输入旧密码", Toast.LENGTH_SHORT).show();
+            Toasty.warning(ModifyUserDataActivity.this, "请输入旧密码", Toast.LENGTH_SHORT, true).show();
             return;
         }
 
         String password_new = et_password_new.getText().toString().trim();
         if (TextUtils.isEmpty(password_new)) {
-            Toast.makeText(this, "请输入新密码", Toast.LENGTH_SHORT).show();
+            Toasty.warning(ModifyUserDataActivity.this, "请输入新密码", Toast.LENGTH_SHORT, true).show();
             return;
         }
 

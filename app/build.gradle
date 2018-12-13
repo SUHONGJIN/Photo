@@ -66,6 +66,6 @@ dependencies {
     implementation 'com.bm.photoview:library:1.4.1'
 
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
-
+    implementation 'com.longsh:OptionFrame:1.0.0'
 
 }

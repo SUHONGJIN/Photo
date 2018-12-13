@@ -1,10 +1,16 @@
 package com.yiyiba.photo.ui.fragment.photofragment;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +23,7 @@ import com.yiyiba.photo.R;
 import com.yiyiba.photo.adapter.Photo1Adapter;
 import com.yiyiba.photo.bean.Photo1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -31,6 +38,7 @@ public class Fragment1 extends Fragment {
     private RecyclerView mRecyclerView;
     private SmartRefreshLayout refreshLayout;
     private Photo1Adapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,6 +54,7 @@ public class Fragment1 extends Fragment {
         refreshLayout = (SmartRefreshLayout) view.findViewById(R.id.refreshLayout);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
+
     }
 
     private void initData() {
@@ -68,7 +77,9 @@ public class Fragment1 extends Fragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                adapter.notifyDataSetChanged();  //通知适配器数据改变
+                if (adapter != null){
+                    adapter.notifyDataSetChanged();  //通知适配器数据改变
+                }
                 refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
             }
         });
@@ -76,12 +87,10 @@ public class Fragment1 extends Fragment {
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
-                adapter.notifyDataSetChanged();  //通知适配器数据改变
                 refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
             }
         });
 
     }
-
 
 }

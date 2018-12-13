@@ -1,7 +1,5 @@
 package com.yiyiba.photo.ui.fragment.mainfragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,27 +7,33 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.longsh.optionframelibrary.OptionBottomDialog;
+import com.longsh.optionframelibrary.OptionMaterialDialog;
 import com.yiyiba.photo.R;
 import com.yiyiba.photo.bean.User;
 import com.yiyiba.photo.ui.activity.AboutActivity;
-import com.yiyiba.photo.ui.activity.CollectActivity;
 import com.yiyiba.photo.ui.activity.FeedBackActivity;
 import com.yiyiba.photo.ui.activity.LikeActivity;
 import com.yiyiba.photo.ui.activity.LoginActivity;
 import com.yiyiba.photo.ui.activity.MainActivity;
+import com.yiyiba.photo.ui.activity.ModifyUserDataActivity;
+import com.yiyiba.photo.ui.activity.MyDownloadActivity;
 import com.yiyiba.photo.ui.activity.SettingActivity;
 import com.yiyiba.photo.utlis.ActivityCollector;
 import com.yiyiba.photo.view.ItemView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.bmob.v3.BmobUser;
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
-import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * Created by SuHongJin on 2018/12/9.
@@ -46,7 +50,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private ItemView my_item4;
     private ItemView my_item5;
     private ItemView my_item6;
-
+    private static final int TYPE_VALUE_NICK = 1;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,16 +87,17 @@ public class UserFragment extends Fragment implements View.OnClickListener {
      * 初始化
      */
     private void initData() {
-//        String url = "http://p0.so.qhmsg.com/bdr/1080__/t019706030483cc8cbf.jpg";
+
+        String url = "http://p0.so.qhmsg.com/bdr/1080__/t019706030483cc8cbf.jpg";
 //        Glide.with(getContext())
 //                .load(url)
 //                .bitmapTransform(new BlurTransformation(getContext(), 8, 5))
 //                .error(R.drawable.bg_image)
 //                .into(mImage);
-//        Glide.with(getContext())
-//                .load(url)
-//                .error(R.mipmap.icon_user_head)
-//                .into(civ_head);
+        Glide.with(getContext())
+                .load(url)
+                .error(R.mipmap.icon_user_head)
+                .into(civ_head);
 
         if (BmobUser.isLogin()) {
             User user = BmobUser.getCurrentUser(User.class);
@@ -113,16 +118,41 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 if (!BmobUser.isLogin()){
                     startActivity(new Intent(getContext(), LoginActivity.class));
                 }else {
-                    Toast.makeText(getContext(),"头像暂时不支持更换",Toast.LENGTH_LONG).show();
+                    List<String> stringList = new ArrayList<String>();
+                    stringList.add("拍照");
+                    stringList.add("从相册选择");
+                    final OptionBottomDialog optionBottomDialog = new OptionBottomDialog(getContext(), stringList);
+                    optionBottomDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            switch (position) {
+                                case 0:
+                                    Toasty.info(getContext(), "拍照", Toast.LENGTH_SHORT, true).show();
+                                    break;
+                                case 1:
+                                    Toasty.info(getContext(), "从相册选择", Toast.LENGTH_SHORT, true).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                            optionBottomDialog.dismiss();
+                        }
+                    });
+
                 }
                 break;
             case R.id.tv_user_name:
                 if (!BmobUser.isLogin()){
                     startActivity(new Intent(getContext(), LoginActivity.class));
+                } else {
+                    Intent intent = new Intent(getContext(), ModifyUserDataActivity.class);
+                    intent.putExtra("title", "修改昵称");
+                    intent.putExtra("type", TYPE_VALUE_NICK);
+                    startActivity(intent);
                 }
                 break;
             case R.id.my_item1:
-                startActivity(new Intent(getContext(), CollectActivity.class));
+                startActivity(new Intent(getContext(), MyDownloadActivity.class));
                 break;
             case R.id.my_item2:
                 startActivity(new Intent(getContext(), LikeActivity.class));
@@ -137,28 +167,32 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), AboutActivity.class));
                 break;
             case R.id.my_item6:
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle("温馨提示您:");
-                dialog.setMessage("即将退出登录！");
-                dialog.setNegativeButton("果断退出", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //退出登录，同时清除缓存用户对象。
-                        BmobUser.logOut();
-                        //退出APP
-                        ActivityCollector.removeAllActivity();
-                        //跳转到主页面
-                        startActivity(new Intent(getContext(), MainActivity.class));
-                        Toasty.success(getContext(),"退出登录成功",Toast.LENGTH_SHORT,true).show();
-                    }
-                });
-                dialog.setNeutralButton("取消退出", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                    }
-                });
-                dialog.show();
+                final OptionMaterialDialog mMaterialDialog = new OptionMaterialDialog(getContext());
+                mMaterialDialog.setTitle("温馨提示")
+                        .setMessage("要退出登录吗？")
+                        .setPositiveButton("确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //退出登录，同时清除缓存用户对象。
+                                BmobUser.logOut();
+                                //退出APP
+                                ActivityCollector.removeAllActivity();
+                                //跳转到主页面
+                                startActivity(new Intent(getContext(), MainActivity.class));
+                                Toasty.success(getContext(), "已退出登录", Toast.LENGTH_SHORT, true).show();
+                                mMaterialDialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("取消",
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        mMaterialDialog.dismiss();
+                                    }
+                                })
+                        .setCanceledOnTouchOutside(true)
+                        .show();
 
                 break;
 

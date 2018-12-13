@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yiyiba.photo.R;
 
 /**
@@ -17,6 +20,7 @@ import com.yiyiba.photo.R;
 
 public class ClassifyFragment extends Fragment {
     private ImageView iv_everyday_image;
+    private SmartRefreshLayout mRefreshLayout;
 
     @Nullable
     @Override
@@ -29,5 +33,14 @@ public class ClassifyFragment extends Fragment {
     private void initView(View view) {
         iv_everyday_image = (ImageView) view.findViewById(R.id.iv_everyday_image);
         Glide.with(getContext()).load("http://api.mmno.com/api/bing/img_1366").into(iv_everyday_image);
+
+        mRefreshLayout = (SmartRefreshLayout) view.findViewById(R.id.mRefreshLayout);
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+
+                mRefreshLayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
     }
 }

@@ -9,8 +9,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.longsh.optionframelibrary.OptionMaterialDialog;
 import com.yiyiba.photo.R;
 import com.yiyiba.photo.common.BaseActivity;
+import com.yiyiba.photo.utlis.ActivityCollector;
 
 import cn.bmob.v3.BmobUser;
 import es.dmoral.toasty.Toasty;
@@ -84,7 +86,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(intent1);
                 break;
             case R.id.rl_setting_item3:
-                Toasty.success(SettingActivity.this, "暂时无下载内容", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(SettingActivity.this,MyDownloadActivity.class));
                 break;
             case R.id.rl_setting_item4:
                 boolean isChecked = mSwitch.isChecked();
@@ -95,7 +97,25 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 }
                 break;
             case R.id.rl_setting_item5:
-                Toasty.success(SettingActivity.this, "清除缓存成功", Toast.LENGTH_SHORT).show();
+                final OptionMaterialDialog mMaterialDialog = new OptionMaterialDialog(SettingActivity.this);
+                mMaterialDialog.setTitle("温馨提示")
+                        .setMessage("确定清除缓存吗")
+                        .setPositiveButton("确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toasty.success(SettingActivity.this, "清除缓存成功", Toast.LENGTH_SHORT).show();
+                                mMaterialDialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("取消",
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        mMaterialDialog.dismiss();
+                                    }
+                                })
+                        .setCanceledOnTouchOutside(true)
+                        .show();
                 break;
             case R.id.rl_setting_item6:
                 Toasty.success(SettingActivity.this, "当前是最新版本", Toast.LENGTH_SHORT).show();

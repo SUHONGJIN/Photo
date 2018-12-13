@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.yiyiba.photo.R;
 import com.yiyiba.photo.common.BaseActivity;
 
-public class CollectActivity extends BaseActivity {
+public class MyDownloadActivity extends BaseActivity {
 
     private ImageView iv_back;
     private TextView tv_title;
@@ -16,14 +16,14 @@ public class CollectActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collect);
+        setContentView(R.layout.activity_my_download);
         initView();
     }
 
     private void initView() {
         iv_back = (ImageView) findViewById(R.id.iv_back);
         tv_title = (TextView) findViewById(R.id.tv_title);
-        tv_title.setText("作品收藏");
+        tv_title.setText("我的下载");
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

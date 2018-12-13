@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">118图库</string>
-    <string name="item_name1">收藏的作品</string>
+    <string name="item_name1">我的下载</string>
     <string name="item_name2">喜欢的作品</string>
     <string name="item_name3">我的设置</string>
     <string name="item_name4">吐槽与建议</string>

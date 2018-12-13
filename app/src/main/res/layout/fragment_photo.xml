@@ -14,7 +14,8 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="作品欣赏"
-           android:textSize="16sp"
+           android:textSize="17sp"
+           android:textStyle="bold"
            android:layout_centerInParent="true"
            android:textColor="@color/black"/>
    </RelativeLayout>
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         app:tabBackground="@color/ghostwhite"
         app:tabTextColor="@color/gray"
-        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabSelectedTextColor="@color/black2"
         app:tabIndicatorHeight="2dp"
         app:tabIndicatorColor="@color/colorPrimary">
     </android.support.design.widget.TabLayout>

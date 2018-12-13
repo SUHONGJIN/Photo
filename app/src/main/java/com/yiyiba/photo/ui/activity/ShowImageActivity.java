@@ -1,7 +1,11 @@
 package com.yiyiba.photo.ui.activity;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +20,8 @@ import com.yiyiba.photo.R;
 import com.yiyiba.photo.common.BaseActivity;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
@@ -34,6 +40,9 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
     private ProgressBar mProgress;
     private int progress = 0;
     private TextView tv_progress_value;
+    private ImageView iv_share_image;
+    //创建权限集合
+    private List<String> permissionList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,7 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.activity_show_image);
         initView();
         initData();
+        checkPermission();
     }
 
 
@@ -63,6 +73,8 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
         iv_download_image.setOnClickListener(this);
         mProgress = (ProgressBar) findViewById(R.id.mProgress);
         tv_progress_value = (TextView) findViewById(R.id.tv_progress_value);
+        iv_share_image = (ImageView) findViewById(R.id.iv_share_image);
+        iv_share_image.setOnClickListener(this);
     }
 
     private void initData() {
@@ -78,18 +90,25 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
                 if (iv_like.getTag().equals("unselect")) {
                     iv_like.setImageResource(R.mipmap.icon_like_select);
                     iv_like.setTag("select");
-                    Toast.makeText(ShowImageActivity.this,"点赞成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShowImageActivity.this, "点赞成功", Toast.LENGTH_SHORT).show();
                 } else if (iv_like.getTag().equals("select")) {
                     iv_like.setImageResource(R.mipmap.icon_like_default);
                     iv_like.setTag("unselect");
-                    Toast.makeText(ShowImageActivity.this,"点赞取消",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShowImageActivity.this, "点赞取消", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.iv_download_image:
+
+//                if (!permissionList.isEmpty()){
+//
+//                }
                 //获取当前系统时间
                 String fileName = String.valueOf(System.currentTimeMillis());
                 BmobFile bmobfile = new BmobFile("myimage" + fileName + ".png", "", image_url);
                 downloadFile(bmobfile);
+                break;
+            case R.id.iv_share_image:
+                Toast.makeText(ShowImageActivity.this, "分享成功！", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
@@ -115,10 +134,19 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
             public void done(String savePath, BmobException e) {
                 if (e == null) {
                     Log.i("bmoba", "下载成功,保存路径:" + savePath);
-                    Toasty.success(ShowImageActivity.this, "下载成功", Toast.LENGTH_SHORT, true).show();
+                    mProgress.setVisibility(View.GONE);
+                    tv_progress_value.setVisibility(View.GONE);
+                    iv_download_image.setVisibility(View.VISIBLE);
+                    progress = 0;
+                    Toasty.success(ShowImageActivity.this, "下载成功，保存路径:"+savePath, Toast.LENGTH_LONG, true).show();
                 } else {
                     Log.i("bmoba", "下载失败：" + e.getErrorCode() + "," + e.getMessage());
-                    Toasty.error(ShowImageActivity.this, "下载失败", Toast.LENGTH_SHORT, true).show();
+                    mProgress.setVisibility(View.GONE);
+                    tv_progress_value.setVisibility(View.GONE);
+                    iv_download_image.setVisibility(View.VISIBLE);
+                    progress = 0;
+                    Toasty.error(ShowImageActivity.this, "下载失败,请检查权限或网络是否开启。", Toast.LENGTH_SHORT, true).show();
+                    //Toasty.error(ShowImageActivity.this, "错误信息：" + e.getMessage().toString(), Toast.LENGTH_SHORT, true).show();
                 }
             }
 
@@ -128,15 +156,46 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
                 progress = value;
                 mProgress.setProgress(progress);
                 tv_progress_value.setText(progress + "%");
-                if (progress == 100) {
-                    mProgress.setVisibility(View.GONE);
-                    tv_progress_value.setVisibility(View.GONE);
-                    iv_download_image.setVisibility(View.VISIBLE);
-                    progress=0;
-                }
             }
 
         });
     }
 
+    //
+    private void checkPermission() {
+        //检查权限是否获取
+        if (ContextCompat.checkSelfPermission(ShowImageActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (ContextCompat.checkSelfPermission(ShowImageActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(android.Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+
+        if (!permissionList.isEmpty()) {
+            String[] permission = permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(ShowImageActivity.this, permission, 1);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0) {
+                    for (int results : grantResults) {
+                        if (results != PackageManager.PERMISSION_GRANTED) {
+                            Toasty.warning(ShowImageActivity.this, "为了能正常下载保存图片，建议打开相应的权限。");
+                        } else {
+                            //TODO
+                        }
+                    }
+                } else {
+                    Toasty.error(ShowImageActivity.this, "未知权限错误!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                break;
+        }
+    }
 }

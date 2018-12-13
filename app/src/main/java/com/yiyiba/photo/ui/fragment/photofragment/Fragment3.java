@@ -69,7 +69,9 @@ public class Fragment3 extends Fragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                adapter.notifyDataSetChanged();  //通知适配器数据改变
+                if (adapter!=null){
+                    adapter.notifyDataSetChanged();  //通知适配器数据改变
+                }
                 refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
             }
         });
@@ -77,7 +79,6 @@ public class Fragment3 extends Fragment {
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
-                adapter.notifyDataSetChanged();  //通知适配器数据改变
                 refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
             }
         });
