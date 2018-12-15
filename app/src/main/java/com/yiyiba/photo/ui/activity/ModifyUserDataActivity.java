@@ -44,6 +44,14 @@ public class ModifyUserDataActivity extends BaseActivity implements View.OnClick
     }
 
     private void initData() {
+        //获取用户昵称
+        User user = BmobUser.getCurrentUser(User.class);
+        String nick =user.getNick();
+        if (nick!=null){
+            et_nick.setText(nick);
+            //显示光标位置在最后
+            et_nick.setSelection(nick.length());
+        }
 
     }
 

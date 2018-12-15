@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
+import com.mob.MobSDK;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class App extends Application {
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
         Bmob.initialize(this,"c140eee577aedd9dbe4011c1b016e425");
-
+        MobSDK.init(this);
     }
 
     @Override

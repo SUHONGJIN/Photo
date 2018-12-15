@@ -25,11 +25,11 @@ import java.util.List;
  */
 
 public class Photo2Adapter extends RecyclerView.Adapter<Photo2Adapter.ViewHolder>{
-    private List<Photo2> photo1List = new ArrayList<>();
+    private List<Photo2> photo2List = new ArrayList<>();
     private Context context;
 
     public Photo2Adapter(List<Photo2> photo2, Context context){
-        this.photo1List = photo2;
+        this.photo2List = photo2;
         this.context=context;
     }
 
@@ -45,14 +45,15 @@ public class Photo2Adapter extends RecyclerView.Adapter<Photo2Adapter.ViewHolder
 
         final int position=viewHolder.getAdapterPosition();
 
-        viewHolder.tv_photo.setText(photo1List.get(i).getImageTitle2());
-        Glide.with(context).load(photo1List.get(i).getImageUrl2()).placeholder(R.drawable.bg_default_image).into(viewHolder.iv_photo);
+        viewHolder.tv_photo.setText(photo2List.get(i).getImageTitle2());
+        Glide.with(context).load(photo2List.get(i).getImageUrl2()).placeholder(R.drawable.bg_default_image).into(viewHolder.iv_photo);
         //点击事件
         viewHolder.ll_photo_itemview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ShowImageActivity.class);
-                intent.putExtra("image_url",photo1List.get(position).getImageUrl2());
+                intent.putExtra("image_url",photo2List.get(position).getImageUrl2());
+                intent.putExtra("image_title",photo2List.get(position).getImageTitle2());
                 context.startActivity(intent);
             }
         });
@@ -60,7 +61,7 @@ public class Photo2Adapter extends RecyclerView.Adapter<Photo2Adapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return photo1List.size();
+        return photo2List.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bm.library.PhotoView;
 import com.bumptech.glide.Glide;
+import com.longsh.optionframelibrary.OptionMaterialDialog;
 import com.yiyiba.photo.R;
 import com.yiyiba.photo.common.BaseActivity;
 
@@ -26,6 +27,7 @@ import java.util.List;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.DownloadFileListener;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import es.dmoral.toasty.Toasty;
 
 public class ShowImageActivity extends BaseActivity implements View.OnClickListener {
@@ -37,10 +39,12 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
     private ImageView iv_like;
     private ImageView iv_download_image;
     private String image_url;
+    private String image_title;
     private ProgressBar mProgress;
     private int progress = 0;
     private TextView tv_progress_value;
     private ImageView iv_share_image;
+    private String imageSavePath;
     //创建权限集合
     private List<String> permissionList = new ArrayList<>();
 
@@ -79,6 +83,7 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
 
     private void initData() {
         image_url = getIntent().getStringExtra("image_url");
+        image_title = getIntent().getStringExtra("image_title");
         Glide.with(ShowImageActivity.this).load(image_url).into(iv_show_image);
     }
 
@@ -99,16 +104,39 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.iv_download_image:
 
-//                if (!permissionList.isEmpty()){
-//
-//                }
                 //获取当前系统时间
                 String fileName = String.valueOf(System.currentTimeMillis());
                 BmobFile bmobfile = new BmobFile("myimage" + fileName + ".png", "", image_url);
                 downloadFile(bmobfile);
                 break;
             case R.id.iv_share_image:
-                Toast.makeText(ShowImageActivity.this, "分享成功！", Toast.LENGTH_SHORT).show();
+
+                if (imageSavePath==null){
+                    final OptionMaterialDialog mMaterialDialog = new OptionMaterialDialog(ShowImageActivity.this);
+                    mMaterialDialog.setTitle("小贴士：")
+                            .setMessage("保存图片至本地才能分享哦")
+                            .setPositiveButton("保存", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    //获取当前系统时间
+                                    String fileName2 = String.valueOf(System.currentTimeMillis());
+                                    BmobFile bmobfile2 = new BmobFile("myimage" + fileName2 + ".png", "", image_url);
+                                    downloadFile(bmobfile2);
+                                    mMaterialDialog.dismiss();
+                                }
+                            })
+                            .setNegativeButton("取消",
+                                    new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            mMaterialDialog.dismiss();
+                                        }
+                                    })
+                            .setCanceledOnTouchOutside(true)
+                            .show();
+                }else {
+                    showShare();
+                }
                 break;
             default:
                 break;
@@ -134,11 +162,12 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
             public void done(String savePath, BmobException e) {
                 if (e == null) {
                     Log.i("bmoba", "下载成功,保存路径:" + savePath);
+                    imageSavePath=savePath;
                     mProgress.setVisibility(View.GONE);
                     tv_progress_value.setVisibility(View.GONE);
                     iv_download_image.setVisibility(View.VISIBLE);
                     progress = 0;
-                    Toasty.success(ShowImageActivity.this, "下载成功，保存路径:"+savePath, Toast.LENGTH_LONG, true).show();
+                    Toasty.success(ShowImageActivity.this, "图片已保存至本地", Toast.LENGTH_SHORT, true).show();
                 } else {
                     Log.i("bmoba", "下载失败：" + e.getErrorCode() + "," + e.getMessage());
                     mProgress.setVisibility(View.GONE);
@@ -146,7 +175,6 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
                     iv_download_image.setVisibility(View.VISIBLE);
                     progress = 0;
                     Toasty.error(ShowImageActivity.this, "下载失败,请检查权限或网络是否开启。", Toast.LENGTH_SHORT, true).show();
-                    //Toasty.error(ShowImageActivity.this, "错误信息：" + e.getMessage().toString(), Toast.LENGTH_SHORT, true).show();
                 }
             }
 
@@ -160,7 +188,23 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
 
         });
     }
-
+    private void showShare() {
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+        // title标题，微信、QQ和QQ空间等平台使用
+        oks.setTitle("图片作品分享");
+        // titleUrl QQ和QQ空间跳转链接
+        oks.setTitleUrl(image_url);
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText(image_title);
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        oks.setImagePath(imageSavePath);//确保SDcard下面存在此张图片
+        // url在微信、微博，Facebook等平台中使用
+        oks.setUrl(image_url);
+        // 启动分享GUI
+        oks.show(this);
+    }
     //
     private void checkPermission() {
         //检查权限是否获取

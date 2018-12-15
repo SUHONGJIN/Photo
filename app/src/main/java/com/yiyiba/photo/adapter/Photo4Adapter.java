@@ -54,6 +54,7 @@ public class Photo4Adapter extends RecyclerView.Adapter<Photo4Adapter.ViewHolder
             public void onClick(View view) {
                 Intent intent = new Intent(context, ShowImageActivity.class);
                 intent.putExtra("image_url",photo4List.get(position).getImageUrl4());
+                intent.putExtra("image_title",photo4List.get(position).getImageTitle4());
                 context.startActivity(intent);
             }
         });

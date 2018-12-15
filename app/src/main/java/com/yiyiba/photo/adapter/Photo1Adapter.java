@@ -53,6 +53,7 @@ public class Photo1Adapter extends RecyclerView.Adapter<Photo1Adapter.ViewHolder
             public void onClick(View view) {
                 Intent intent = new Intent(context, ShowImageActivity.class);
                 intent.putExtra("image_url",photo1List.get(position).getImageUrl());
+                intent.putExtra("image_title",photo1List.get(position).getImageTitle());
                 context.startActivity(intent);
             }
         });

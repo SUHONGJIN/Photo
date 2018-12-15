@@ -51,6 +51,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private ItemView my_item5;
     private ItemView my_item6;
     private static final int TYPE_VALUE_NICK = 1;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -169,7 +170,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             case R.id.my_item6:
 
                 final OptionMaterialDialog mMaterialDialog = new OptionMaterialDialog(getContext());
-                mMaterialDialog.setTitle("温馨提示")
+                mMaterialDialog.setTitle("小贴士：")
                         .setMessage("要退出登录吗？")
                         .setPositiveButton("确定", new View.OnClickListener() {
                             @Override

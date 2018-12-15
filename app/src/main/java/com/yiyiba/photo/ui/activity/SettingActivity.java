@@ -98,7 +98,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.rl_setting_item5:
                 final OptionMaterialDialog mMaterialDialog = new OptionMaterialDialog(SettingActivity.this);
-                mMaterialDialog.setTitle("温馨提示")
+                mMaterialDialog.setTitle("小贴士：")
                         .setMessage("确定清除缓存吗")
                         .setPositiveButton("确定", new View.OnClickListener() {
                             @Override
