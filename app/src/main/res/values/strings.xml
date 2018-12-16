@@ -14,4 +14,7 @@
     <string name="setting_item4">消息推送</string>
     <string name="setting_item5">清除缓存</string>
     <string name="setting_item6">版本升级</string>
+
+    <string name="about"> 《118图库》是一款欣赏摄影图片作品的一款APP，这里有极具个性的摄影作品，涉及生活摄影、旅游摄影、风光摄影等,用户可以下载保存图片和分享自己喜欢的图片给好友。还可以参考图库的作品学习到一些摄影技巧等......</string>
+
 </resources>

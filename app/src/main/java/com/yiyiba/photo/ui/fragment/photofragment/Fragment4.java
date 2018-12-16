@@ -8,6 +8,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -31,6 +32,7 @@ public class Fragment4 extends Fragment {
     private RecyclerView mRecyclerView4;
     private SmartRefreshLayout refreshLayout;
     private Photo4Adapter adapter;
+    private LinearLayout ll_load_state;
 
     @Nullable
     @Override
@@ -44,6 +46,7 @@ public class Fragment4 extends Fragment {
     private void initView(View view) {
         mRecyclerView4 = (RecyclerView) view.findViewById(R.id.mRecyclerView4);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        ll_load_state = (LinearLayout) view.findViewById(R.id.ll_load_state);
         mRecyclerView4.setLayoutManager(layoutManager);
         refreshLayout = (SmartRefreshLayout) view.findViewById(R.id.refreshLayout);
     }
@@ -58,6 +61,8 @@ public class Fragment4 extends Fragment {
                 if (e == null) {
                     adapter = new Photo4Adapter(object, getContext());
                     mRecyclerView4.setAdapter(adapter);
+                    mRecyclerView4.setVisibility(View.VISIBLE);
+                    ll_load_state.setVisibility(View.GONE);
                 } else {
 
                 }
@@ -69,7 +74,7 @@ public class Fragment4 extends Fragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                if (adapter != null){
+                if (adapter != null) {
                     adapter.notifyDataSetChanged();  //通知适配器数据改变
                 }
                 refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败

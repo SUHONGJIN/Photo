@@ -89,16 +89,16 @@ public class UserFragment extends Fragment implements View.OnClickListener {
      */
     private void initData() {
 
-        String url = "http://p0.so.qhmsg.com/bdr/1080__/t019706030483cc8cbf.jpg";
+//        String url = "http://p0.so.qhmsg.com/bdr/1080__/t019706030483cc8cbf.jpg";
 //        Glide.with(getContext())
 //                .load(url)
 //                .bitmapTransform(new BlurTransformation(getContext(), 8, 5))
 //                .error(R.drawable.bg_image)
 //                .into(mImage);
-        Glide.with(getContext())
-                .load(url)
-                .error(R.mipmap.icon_user_head)
-                .into(civ_head);
+//        Glide.with(getContext())
+//                .load(url)
+//                .error(R.mipmap.icon_user_head)
+//                .into(civ_head);
 
         if (BmobUser.isLogin()) {
             User user = BmobUser.getCurrentUser(User.class);

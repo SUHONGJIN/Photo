@@ -24,7 +24,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true  //是否启动混淆 ture:打开   false:关闭
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -51,8 +51,8 @@ MobSDK {
                 miniprogramType 2
             }
             QQ {
-                appId "100371282"
-                appKey "aed9b0303e3ed1e27bae87c33761161d"
+                appId "1107972653"
+                appKey "FJWPokB8npVVncEK"
             }
             WechatMoments {
                 appId "wx4868b35061f87885"

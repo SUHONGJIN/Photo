@@ -1,7 +1,6 @@
 package com.yiyiba.photo.utlis;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -12,60 +11,38 @@ import android.view.ViewGroup;
  * Created by SuHongJin on 2018/12/13.
  */
 
-public class EmptyRecyclerView extends RecyclerView {
-    private View mEmptyview;
-
+public class EmptyRecyclerView extends RecyclerView{
+    private View mEmptyView;
     private AdapterDataObserver mObserver = new AdapterDataObserver() {
         @Override
         public void onChanged() {
-            super.onChanged();
             Adapter adapter = getAdapter();
-            if (adapter.getItemCount() == 0) {
-                mEmptyview.setVisibility(VISIBLE);
+            if(adapter.getItemCount() == 0){
+                mEmptyView.setVisibility(VISIBLE);
                 EmptyRecyclerView.this.setVisibility(GONE);
-            } else {
-                mEmptyview.setVisibility(GONE);
+            } else{
+                mEmptyView.setVisibility(GONE);
                 EmptyRecyclerView.this.setVisibility(VISIBLE);
             }
         }
 
-        @Override
-        public void onItemRangeChanged(int positionStart, int itemCount) {
-            super.onItemRangeChanged(positionStart, itemCount);
-        }
-
-        @Override
-        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-            super.onItemRangeMoved(fromPosition, toPosition, itemCount);
-        }
-
-        @Override
-        public void onItemRangeRemoved(int positionStart, int itemCount) {
-            super.onItemRangeRemoved(positionStart, itemCount);
-        }
-
-        @Override
-        public void onItemRangeInserted(int positionStart, int itemCount) {
-            super.onItemRangeInserted(positionStart, itemCount);
-        }
-
-        @Override
-        public void onItemRangeChanged(int positionStart, int itemCount, @Nullable Object payload) {
-            super.onItemRangeChanged(positionStart, itemCount, payload);
-        }
+        public void onItemRangeChanged(int positionStart, int itemCount) {onChanged();}
+        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {onChanged();}
+        public void onItemRangeRemoved(int positionStart, int itemCount) {onChanged();}
+        public void onItemRangeInserted(int positionStart, int itemCount) {onChanged();}
+        public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {onChanged();}
     };
 
-    public EmptyRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public EmptyRecyclerView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public void setmEmptyview(View mEmptyview) {
-        this.mEmptyview = mEmptyview;
-        ((ViewGroup)this.getRootView()).addView(mEmptyview);
+    public void setEmptyView(View view){
+        this.mEmptyView = view;
+        ((ViewGroup)this.getRootView()).addView(mEmptyView); //加入主界面布局
     }
 
-    @Override
-    public void setAdapter(@Nullable Adapter adapter) {
+    public void setAdapter(RecyclerView.Adapter adapter){
         super.setAdapter(adapter);
         adapter.registerAdapterDataObserver(mObserver);
         mObserver.onChanged();

@@ -1,19 +1,14 @@
 package com.yiyiba.photo.ui.fragment.photofragment;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -23,7 +18,6 @@ import com.yiyiba.photo.R;
 import com.yiyiba.photo.adapter.Photo1Adapter;
 import com.yiyiba.photo.bean.Photo1;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -38,6 +32,7 @@ public class Fragment1 extends Fragment {
     private RecyclerView mRecyclerView;
     private SmartRefreshLayout refreshLayout;
     private Photo1Adapter adapter;
+    private LinearLayout ll_load_state;
 
     @Nullable
     @Override
@@ -52,9 +47,9 @@ public class Fragment1 extends Fragment {
     private void initView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.mRecyclerView);
         refreshLayout = (SmartRefreshLayout) view.findViewById(R.id.refreshLayout);
+        ll_load_state = (LinearLayout) view.findViewById(R.id.ll_load_state);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
-
     }
 
     private void initData() {
@@ -68,6 +63,8 @@ public class Fragment1 extends Fragment {
                 if (e == null) {
                     adapter = new Photo1Adapter(object, getContext());
                     mRecyclerView.setAdapter(adapter);
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                    ll_load_state.setVisibility(View.GONE);
                 } else {
 
                 }
@@ -77,7 +74,7 @@ public class Fragment1 extends Fragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                if (adapter != null){
+                if (adapter != null) {
                     adapter.notifyDataSetChanged();  //通知适配器数据改变
                 }
                 refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败

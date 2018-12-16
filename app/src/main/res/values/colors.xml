@@ -3,9 +3,9 @@
     <!--<color name="colorPrimary">#fe7e01</color>-->
     <!--<color name="colorPrimaryDark">#fe7e01</color>-->
     <!--<color name="colorAccent">#99CC33</color>-->
-    <color name="colorPrimary">#3f3f3f</color>
-    <color name="colorPrimaryDark">#3f3f3f</color>
-    <color name="colorAccent">#3f3f3f</color>
+    <color name="colorPrimary">#7f7f7f</color>
+    <color name="colorPrimaryDark">#7f7f7f</color>
+    <color name="colorAccent">#7f7f7f</color>
     <color name="dark">#707070</color>
     <color name="crime">#EE0000</color>
     <color name="android_layout_bg">#fafafa</color>
