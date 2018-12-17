@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -31,14 +32,14 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="220dp"
                     android:padding="6dp">
 
                     <ImageView
                         android:id="@+id/iv_everyday_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_everyday_image"
+                        android:background="@color/gray_cc"
                         android:scaleType="centerCrop" />
 
                     <TextView
@@ -72,7 +73,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
-                            android:lines="3"
+                            android:lines="5"
                             android:paddingBottom="6dp"
                             android:paddingLeft="6dp"
                             android:paddingRight="6dp"
@@ -86,211 +87,46 @@
 
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
+
+            <com.yiyiba.photo.view.ClassifyItemView
+                android:id="@+id/classify_item1"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="10dp">
+                android:layout_height="wrap_content"
+                app:setClassifyContent="@string/classify_item1"
+                app:setClassifyIcon="@drawable/image_classify1"
+                app:setClassifyTitle="@string/classify1" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/bg_everyday_image" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="6dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="摄影"
-                            android:textColor="@color/black2"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="今天是国际山岳日，联合国为大山们创立了这个节日。据了解世界上有"
-                            android:textColor="@color/gray" />
-                    </LinearLayout>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
+            <com.yiyiba.photo.view.ClassifyItemView
+                android:id="@+id/classify_item2"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="10dp">
+                android:layout_height="wrap_content"
+                app:setClassifyIcon="@drawable/image_classify2"
+                app:setClassifyTitle="@string/classify2"
+                app:setClassifyContent="@string/classify_item2"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/bg_user" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="6dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="摄影"
-                            android:textColor="@color/black2"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="今天是国际山岳日，联合国为大山们创立了这个节日。据了解世界上有"
-                            android:textColor="@color/gray" />
-                    </LinearLayout>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
+            <com.yiyiba.photo.view.ClassifyItemView
+                android:id="@+id/classify_item3"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="10dp">
+                android:layout_height="wrap_content"
+                app:setClassifyIcon="@drawable/image_classify3"
+                app:setClassifyTitle="@string/classify3"
+                app:setClassifyContent="@string/classify_item3"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/bg_everyday_image" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="6dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="摄影"
-                            android:textColor="@color/black2"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="今天是国际山岳日，联合国为大山们创立了这个节日。据了解世界上有"
-                            android:textColor="@color/gray" />
-                    </LinearLayout>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
+            <com.yiyiba.photo.view.ClassifyItemView
+                android:id="@+id/classify_item4"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="10dp">
+                android:layout_height="wrap_content"
+                app:setClassifyIcon="@drawable/image_classify4"
+                app:setClassifyTitle="@string/classify4"
+                app:setClassifyContent="@string/classify_item4"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/bg_user" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="6dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="摄影"
-                            android:textColor="@color/black2"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="今天是国际山岳日，联合国为大山们创立了这个节日。据了解世界上有"
-                            android:textColor="@color/gray" />
-                    </LinearLayout>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
+            <com.yiyiba.photo.view.ClassifyItemView
+                android:id="@+id/classify_item5"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/bg_user" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="6dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="摄影"
-                            android:textColor="@color/black2"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="今天是国际山岳日，联合国为大山们创立了这个节日。据了解世界上有"
-                            android:textColor="@color/gray" />
-                    </LinearLayout>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
+                android:layout_height="wrap_content"
+                app:setClassifyIcon="@drawable/image_classify5"
+                app:setClassifyTitle="@string/classify5"
+                app:setClassifyContent="@string/classify_item5"/>
 
         </LinearLayout>
 

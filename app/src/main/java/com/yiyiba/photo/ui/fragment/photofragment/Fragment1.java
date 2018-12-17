@@ -41,6 +41,8 @@ public class Fragment1 extends Fragment {
 
         initView(view);
         initData();
+
+
         return view;
     }
 
@@ -65,8 +67,6 @@ public class Fragment1 extends Fragment {
                     mRecyclerView.setAdapter(adapter);
                     mRecyclerView.setVisibility(View.VISIBLE);
                     ll_load_state.setVisibility(View.GONE);
-                } else {
-
                 }
             }
         });
@@ -84,7 +84,7 @@ public class Fragment1 extends Fragment {
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+                refreshlayout.finishLoadMore(1000/*,false*/);//传入false表示加载失败
             }
         });
 

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <declare-styleable name="ItemView">
         <attr name="setIcon" format="integer"/>
         <attr name="setText" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ClassifyItemView">
+        <attr name="setClassifyIcon" format="integer" />
+        <attr name="setClassifyTitle" format="string" />
+        <attr name="setClassifyContent" format="string" />
     </declare-styleable>
 </resources>

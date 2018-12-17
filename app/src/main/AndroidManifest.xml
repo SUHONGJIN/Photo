@@ -60,8 +60,9 @@
         <activity android:name=".ui.activity.MyDownloadActivity" />
         <activity android:name=".ui.activity.LikeActivity" />
         <activity android:name=".ui.activity.ModifyUserDataActivity" />
-        <activity android:name=".ui.activity.WelcomeGuideActivity">
-        </activity>
+        <activity android:name=".ui.activity.WelcomeGuideActivity" />
+        <activity android:name=".ui.activity.UserInfoActivity" />
+        <activity android:name=".ui.activity.PhotoListActivity"></activity>
     </application>
 
 </manifest>

@@ -99,7 +99,7 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
                 } else if (iv_like.getTag().equals("select")) {
                     iv_like.setImageResource(R.mipmap.icon_like_default);
                     iv_like.setTag("unselect");
-                    Toast.makeText(ShowImageActivity.this, "点赞取消", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShowImageActivity.this, "取消点赞成功", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.iv_download_image:

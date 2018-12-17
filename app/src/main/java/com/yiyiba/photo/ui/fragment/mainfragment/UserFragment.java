@@ -7,12 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.longsh.optionframelibrary.OptionBottomDialog;
+import com.bumptech.glide.Glide;
 import com.longsh.optionframelibrary.OptionMaterialDialog;
 import com.yiyiba.photo.R;
 import com.yiyiba.photo.bean.User;
@@ -24,15 +23,14 @@ import com.yiyiba.photo.ui.activity.MainActivity;
 import com.yiyiba.photo.ui.activity.ModifyUserDataActivity;
 import com.yiyiba.photo.ui.activity.MyDownloadActivity;
 import com.yiyiba.photo.ui.activity.SettingActivity;
+import com.yiyiba.photo.ui.activity.UserInfoActivity;
 import com.yiyiba.photo.utlis.ActivityCollector;
 import com.yiyiba.photo.view.ItemView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import cn.bmob.v3.BmobUser;
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * Created by SuHongJin on 2018/12/9.
@@ -89,23 +87,29 @@ public class UserFragment extends Fragment implements View.OnClickListener {
      */
     private void initData() {
 
-//        String url = "http://p0.so.qhmsg.com/bdr/1080__/t019706030483cc8cbf.jpg";
-//        Glide.with(getContext())
-//                .load(url)
-//                .bitmapTransform(new BlurTransformation(getContext(), 8, 5))
-//                .error(R.drawable.bg_image)
-//                .into(mImage);
-//        Glide.with(getContext())
-//                .load(url)
-//                .error(R.mipmap.icon_user_head)
-//                .into(civ_head);
+        String url = "http://p1.qqyou.com/touxiang/UploadPic/2014-7/25/2014072522521653329.jpg";
 
+        //设置用户昵称
         if (BmobUser.isLogin()) {
             User user = BmobUser.getCurrentUser(User.class);
             if (user.getNick()!=null){
                 tv_user_name.setText(user.getNick());
                 my_item6.setVisibility(View.VISIBLE);
             }
+
+            //用户背景
+            Glide.with(getContext())
+                    .load(url)
+                    .bitmapTransform(new BlurTransformation(getContext(), 8, 6))
+                    .error(R.drawable.bg_image)
+                    .into(mImage);
+            //用户头像
+            Glide.with(getContext())
+                    .load(url)
+                    .error(R.mipmap.icon_user_head)
+                    .into(civ_head);
+
+
         } else {
             Toasty.info(getContext(), "尚未登录!", Toast.LENGTH_SHORT, true).show();
         }
@@ -119,27 +123,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 if (!BmobUser.isLogin()){
                     startActivity(new Intent(getContext(), LoginActivity.class));
                 }else {
-                    List<String> stringList = new ArrayList<String>();
-                    stringList.add("拍照");
-                    stringList.add("从相册选择");
-                    final OptionBottomDialog optionBottomDialog = new OptionBottomDialog(getContext(), stringList);
-                    optionBottomDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            switch (position) {
-                                case 0:
-                                    Toasty.info(getContext(), "拍照", Toast.LENGTH_SHORT, true).show();
-                                    break;
-                                case 1:
-                                    Toasty.info(getContext(), "从相册选择", Toast.LENGTH_SHORT, true).show();
-                                    break;
-                                default:
-                                    break;
-                            }
-                            optionBottomDialog.dismiss();
-                        }
-                    });
-
+                    startActivity(new Intent(getContext(), UserInfoActivity.class));
                 }
                 break;
             case R.id.tv_user_name:
@@ -156,7 +140,12 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), MyDownloadActivity.class));
                 break;
             case R.id.my_item2:
-                startActivity(new Intent(getContext(), LikeActivity.class));
+                if (!BmobUser.isLogin()) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    Toasty.info(getContext(), "请先登录!", Toast.LENGTH_SHORT, true).show();
+                } else {
+                    startActivity(new Intent(getContext(), LikeActivity.class));
+                }
                 break;
             case R.id.my_item3:
                 Intent intent = new Intent(new Intent(getContext(), SettingActivity.class));
@@ -171,8 +160,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             case R.id.my_item6:
 
                 final OptionMaterialDialog mMaterialDialog = new OptionMaterialDialog(getContext());
-                mMaterialDialog.setTitle("小贴士：")
-                        .setMessage("要退出登录吗？")
+                mMaterialDialog
+                        .setMessage("确定退出登录吗？")
                         .setPositiveButton("确定", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -182,7 +171,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                                 ActivityCollector.removeAllActivity();
                                 //跳转到主页面
                                 startActivity(new Intent(getContext(), MainActivity.class));
-                                Toasty.success(getContext(), "已退出登录", Toast.LENGTH_SHORT, true).show();
+                                Toasty.success(getContext(), "退出登录成功", Toast.LENGTH_SHORT, true).show();
                                 mMaterialDialog.dismiss();
                             }
                         })
@@ -195,7 +184,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                                 })
                         .setCanceledOnTouchOutside(true)
                         .show();
-
                 break;
 
                 default:break;
@@ -209,9 +197,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
         if (requestCode == REQUEST_CODE_UPDATE_NICK) {
             //刷新用户昵称
-            User user = BmobUser.getCurrentUser(User.class);
-            if (user.getNick() != null) {
-                tv_user_name.setText(user.getNick());
+            if (BmobUser.isLogin()) {
+                User user = BmobUser.getCurrentUser(User.class);
+                if (user.getNick() != null) {
+                    tv_user_name.setText(user.getNick());
+                }
             }
         }
     }

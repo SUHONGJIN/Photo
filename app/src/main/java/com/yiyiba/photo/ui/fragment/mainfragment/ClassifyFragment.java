@@ -25,8 +25,10 @@ import com.squareup.okhttp.Response;
 import com.yiyiba.photo.R;
 import com.yiyiba.photo.bean.Bing;
 import com.yiyiba.photo.common.HttpUrl;
+import com.yiyiba.photo.ui.activity.PhotoListActivity;
 import com.yiyiba.photo.ui.activity.ShowImageActivity;
 import com.yiyiba.photo.utlis.HttpUtil;
+import com.yiyiba.photo.view.ClassifyItemView;
 
 import java.io.IOException;
 
@@ -36,7 +38,7 @@ import es.dmoral.toasty.Toasty;
  * Created by SuHongJin on 2018/12/9.
  */
 
-public class ClassifyFragment extends Fragment {
+public class ClassifyFragment extends Fragment implements View.OnClickListener {
     private ImageView iv_everyday_image;
     private SmartRefreshLayout mRefreshLayout;
     private TextView tv_bing_title;
@@ -45,6 +47,12 @@ public class ClassifyFragment extends Fragment {
     private String title;
     private String description;
     private CardView cv_bing_image;
+    private ClassifyItemView classify_item1;
+    private ClassifyItemView classify_item2;
+    private ClassifyItemView classify_item3;
+    private ClassifyItemView classify_item4;
+    private ClassifyItemView classify_item5;
+
 
     private Handler mHandler = new Handler() {
         @Override
@@ -76,8 +84,8 @@ public class ClassifyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ShowImageActivity.class);
-                intent.putExtra("image_url",imgPath);
-                intent.putExtra("image_title",title);
+                intent.putExtra("image_url", imgPath);
+                intent.putExtra("image_title", title);
                 startActivity(intent);
             }
         });
@@ -120,6 +128,16 @@ public class ClassifyFragment extends Fragment {
             }
         });
 
+        classify_item1 = (ClassifyItemView) view.findViewById(R.id.classify_item1);
+        classify_item1.setOnClickListener(this);
+        classify_item2 = (ClassifyItemView) view.findViewById(R.id.classify_item2);
+        classify_item2.setOnClickListener(this);
+        classify_item3 = (ClassifyItemView) view.findViewById(R.id.classify_item3);
+        classify_item3.setOnClickListener(this);
+        classify_item4 = (ClassifyItemView) view.findViewById(R.id.classify_item4);
+        classify_item4.setOnClickListener(this);
+        classify_item5 = (ClassifyItemView) view.findViewById(R.id.classify_item5);
+        classify_item5.setOnClickListener(this);
     }
 
     private void setData(String data) {
@@ -135,4 +153,40 @@ public class ClassifyFragment extends Fragment {
         mHandler.sendMessage(message);
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.classify_item1:
+                Intent intent = new Intent(getContext(), PhotoListActivity.class);
+                intent.putExtra("title","宠物拍摄");
+                intent.putExtra("tag","cw");
+                startActivity(intent);
+                break;
+            case R.id.classify_item2:
+                Intent intent2 = new Intent(getContext(),PhotoListActivity.class);
+                intent2.putExtra("title","儿童拍摄");
+                intent2.putExtra("tag","et");
+                startActivity(intent2);
+                break;
+            case R.id.classify_item3:
+                Intent intent3 = new Intent(getContext(),PhotoListActivity.class);
+                intent3.putExtra("title","人像拍摄");
+                intent3.putExtra("tag","rx");
+                startActivity(intent3);
+                break;
+            case R.id.classify_item4:
+                Intent intent4 = new Intent(getContext(),PhotoListActivity.class);
+                intent4.putExtra("title","手机拍摄");
+                intent4.putExtra("tag","sj");
+                startActivity(intent4);
+                break;
+            case R.id.classify_item5:
+                Intent intent5 = new Intent(getContext(),PhotoListActivity.class);
+                intent5.putExtra("title","其他作品");
+                intent5.putExtra("tag","qt");
+                startActivity(intent5);
+                break;
+            default:break;
+        }
+    }
 }

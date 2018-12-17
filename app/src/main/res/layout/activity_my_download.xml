@@ -4,8 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yiyiba.photo.ui.activity.MyDownloadActivity">
+    android:orientation="vertical"
+    tools:context="com.yiyiba.photo.ui.activity.MyDownloadActivity"
+    android:background="@color/bg_color">
 
     <include layout="@layout/item_titlebar_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="暂无内容"
+            android:gravity="center"
+            android:drawablePadding="10dp"
+            android:drawableTop="@mipmap/icon_nodata"/>
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">118图库</string>
     <string name="item_name1">我的下载</string>
     <string name="item_name2">喜欢的作品</string>
@@ -14,6 +15,21 @@
     <string name="setting_item4">消息推送</string>
     <string name="setting_item5">清除缓存</string>
     <string name="setting_item6">版本升级</string>
+
+
+    <string name="classify1">宠物拍摄</string>
+    <string name="classify2">儿童拍摄</string>
+    <string name="classify3">人像拍摄</string>
+    <string name="classify4">手机拍摄</string>
+    <string name="classify5">其他作品</string>
+
+
+    <string name="classify_item1">在好莱坞电影圈中有两大拍摄难题，一是儿童，二是动物。而巧合的是这两点对于摄影来说也同样适用，作为最难以控制的两大拍摄主体，淘气的儿童和充满野性的动物常常让最有经验的摄影者苦不堪言。而相对于更加高大上的野生动物摄影来说，宠物摄影似乎显得要亲民、容易得多，更何况作为现代品质生活的重要组成部分，宠物摄影也变得越来越流行。</string>
+    <string name="classify_item2">随着时光流逝，婴儿与孩童的生活照片显得格外珍贵。唯有摄影能够将幼童的成长过程和千姿百态的活动永久地留存下来。我们期待着当你长大后再翻起这本相册，看到当时天真的自己！</string>
+    <string name="classify_item3">拍摄人像时，对个别人物的生理缺陷，可以运用不同的光线照明，并采取不同的拍摄角度，适当加以弥补。</string>
+    <string name="classify_item4">手机是每个现代人必备的生活工具，它改变了我们与这个世界互动的方式，摄影尤是如此。改变也意味着革新，虽然手机摄影技术日趋完善，但依然会受到很多相机用户的抵触，认为用相机才是真的玩摄影。相机越来越小、越来越智能、越来越能和我们的生活融入在一起，这不是坏事而是趋势。拿起你的手机，从一个新的角度去记录世界吧。这里有7个训练方法，坚持一周让你变身成为手机摄影达人！</string>
+    <string name="classify_item5">摄影的表现形式是用平面影像表达思想和情感，就像作家用文字讲述故事，画家用画笔描绘生命的色彩，摄影师则是借助相机去捕捉生活中点点滴滴的美，通过艺术化的创作，表达心中的情感。任何一种艺术形式，当掌握了技术，再往深度层面走，都是人的主观表达。摄影作品只有当它承载了人类的精神和情感，才会充满灵性。</string>
+
 
     <string name="about"> 《118图库》是一款欣赏摄影图片作品的一款APP，这里有极具个性的摄影作品，涉及生活摄影、旅游摄影、风光摄影等,用户可以下载保存图片和分享自己喜欢的图片给好友。还可以参考图库的作品学习到一些摄影技巧等......</string>
 
