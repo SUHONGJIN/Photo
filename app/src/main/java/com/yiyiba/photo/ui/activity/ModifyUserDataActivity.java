@@ -34,6 +34,7 @@ public class ModifyUserDataActivity extends BaseActivity implements View.OnClick
     private LinearLayout ll_modify_password;
     private Button btn_commit_modify;
     private int type;
+    private static final int CODE_UPDATE_NICK_SUCCESS = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +142,7 @@ public class ModifyUserDataActivity extends BaseActivity implements View.OnClick
             public void done(BmobException e) {
                 if (e == null) {
                     Toasty.success(ModifyUserDataActivity.this, "昵称修改成功", Toast.LENGTH_SHORT, true).show();
+                    setResult(CODE_UPDATE_NICK_SUCCESS);
                     finish();
                 } else {
                     Toasty.error(ModifyUserDataActivity.this, "昵称修改失败。", Toast.LENGTH_SHORT, true).show();

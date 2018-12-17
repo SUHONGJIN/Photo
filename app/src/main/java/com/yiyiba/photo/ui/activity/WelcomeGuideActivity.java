@@ -1,6 +1,7 @@
 package com.yiyiba.photo.ui.activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
@@ -12,12 +13,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.yiyiba.photo.R;
+import com.yiyiba.photo.common.BaseActivity;
 import com.yiyiba.photo.mjb.SplashActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WelcomeGuideActivity extends AppCompatActivity implements View.OnClickListener {
+public class WelcomeGuideActivity extends BaseActivity implements View.OnClickListener {
 
     private ViewPager pager_guide;
     private Button btn_guide;

@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.longsh.optionframelibrary.OptionMaterialDialog;
 import com.yiyiba.photo.R;
 import com.yiyiba.photo.common.BaseActivity;
-import com.yiyiba.photo.utlis.ActivityCollector;
+import com.yiyiba.photo.utlis.SharedPreferencesUtils;
 
 import cn.bmob.v3.BmobUser;
 import es.dmoral.toasty.Toasty;
@@ -27,9 +27,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private RelativeLayout rl_setting_item4;
     private RelativeLayout rl_setting_item5;
     private RelativeLayout rl_setting_item6;
-    private Switch mSwitch;
+    private Switch mSwitchNotice;
     private static final int TYPE_VALUE_NICK = 1;
-    private static final int TYPE_VALUE_PASSWORD =2;
+    private static final int TYPE_VALUE_PASSWORD = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +42,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         iv_back = (ImageView) findViewById(R.id.iv_back);
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("设置");
-        iv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
         rl_setting_item1 = (RelativeLayout) findViewById(R.id.rl_setting_item1);
         rl_setting_item1.setOnClickListener(this);
         rl_setting_item2 = (RelativeLayout) findViewById(R.id.rl_setting_item2);
@@ -60,40 +55,57 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         rl_setting_item5.setOnClickListener(this);
         rl_setting_item6 = (RelativeLayout) findViewById(R.id.rl_setting_item6);
         rl_setting_item6.setOnClickListener(this);
-        mSwitch = (Switch) findViewById(R.id.mSwitch);
-        mSwitch.setOnClickListener(this);
+        mSwitchNotice = (Switch) findViewById(R.id.mSwitchNotice);
+        mSwitchNotice.setOnClickListener(this);
 
-        if (!BmobUser.isLogin()){
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+        //登录就显示，不登录不显示
+        if (!BmobUser.isLogin()) {
             rl_setting_item1.setVisibility(View.GONE);
             rl_setting_item2.setVisibility(View.GONE);
         }
 
+        boolean isChecked = SharedPreferencesUtils.getisOpenNotice(SettingActivity.this);
+        if (isChecked) {
+            mSwitchNotice.setChecked(true);
+        } else {
+            mSwitchNotice.setChecked(false);
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_setting_item1:
-                Intent intent = new Intent(SettingActivity.this,ModifyUserDataActivity.class);
-                intent.putExtra("title","修改昵称");
-                intent.putExtra("type",TYPE_VALUE_NICK);
+                Intent intent = new Intent(SettingActivity.this, ModifyUserDataActivity.class);
+                intent.putExtra("title", "修改昵称");
+                intent.putExtra("type", TYPE_VALUE_NICK);
                 startActivity(intent);
                 break;
             case R.id.rl_setting_item2:
-                Intent intent1 = new Intent(SettingActivity.this,ModifyUserDataActivity.class);
-                intent1.putExtra("title","修改密码");
-                intent1.putExtra("type",TYPE_VALUE_PASSWORD);
+                Intent intent1 = new Intent(SettingActivity.this, ModifyUserDataActivity.class);
+                intent1.putExtra("title", "修改密码");
+                intent1.putExtra("type", TYPE_VALUE_PASSWORD);
                 startActivity(intent1);
                 break;
             case R.id.rl_setting_item3:
-                startActivity(new Intent(SettingActivity.this,MyDownloadActivity.class));
+                startActivity(new Intent(SettingActivity.this, MyDownloadActivity.class));
                 break;
             case R.id.rl_setting_item4:
-                boolean isChecked = mSwitch.isChecked();
-                if (isChecked){
-                    mSwitch.setChecked(false);
-                }else {
-                    mSwitch.setChecked(true);
+                boolean isChecked = mSwitchNotice.isChecked();
+                if (isChecked) {
+                    mSwitchNotice.setChecked(false);
+                    SharedPreferencesUtils.putisOpenNotice(SettingActivity.this,false);
+                } else {
+                    mSwitchNotice.setChecked(true);
+                    SharedPreferencesUtils.putisOpenNotice(SettingActivity.this,true);
                 }
                 break;
             case R.id.rl_setting_item5:
@@ -124,6 +136,4 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
         }
     }
-
-
 }

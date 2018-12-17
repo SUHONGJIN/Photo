@@ -30,10 +30,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //强制竖屏
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initView();
-
     }
 
     /**

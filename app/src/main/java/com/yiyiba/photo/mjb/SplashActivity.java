@@ -48,13 +48,13 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);//下文有提供
+        setContentView(R.layout.activity_splash);
+        // 强制竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //设置透明状态栏
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-        //强制竖屏
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         App.getInstance().addActivity(this);
         context = SplashActivity.this;
@@ -71,8 +71,7 @@ public class SplashActivity extends Activity {
      */
     private void requestNetwork() {
 
-        //String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=xg90080";
-        String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=1212";
+        String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=xg90080";
         //String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=ttd000";  //已打开接口的id
         Map verif = new HashMap<String, String>();
 

@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.longsh.optionframelibrary.OptionBottomDialog;
 import com.longsh.optionframelibrary.OptionMaterialDialog;
 import com.yiyiba.photo.R;
@@ -40,6 +39,8 @@ import es.dmoral.toasty.Toasty;
  */
 
 public class UserFragment extends Fragment implements View.OnClickListener {
+    private static final int TYPE_VALUE_NICK = 1;
+    private static final int REQUEST_CODE_UPDATE_NICK = 2;
     private ImageView mImage;
     private CircleImageView civ_head;
     private CircleImageView civ_user_head;
@@ -50,7 +51,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private ItemView my_item4;
     private ItemView my_item5;
     private ItemView my_item6;
-    private static final int TYPE_VALUE_NICK = 1;
 
     @Nullable
     @Override
@@ -149,7 +149,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                     Intent intent = new Intent(getContext(), ModifyUserDataActivity.class);
                     intent.putExtra("title", "修改昵称");
                     intent.putExtra("type", TYPE_VALUE_NICK);
-                    startActivity(intent);
+                    startActivityForResult(intent,REQUEST_CODE_UPDATE_NICK);
                 }
                 break;
             case R.id.my_item1:
@@ -159,7 +159,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), LikeActivity.class));
                 break;
             case R.id.my_item3:
-                startActivity(new Intent(getContext(), SettingActivity.class));
+                Intent intent = new Intent(new Intent(getContext(), SettingActivity.class));
+                startActivityForResult(intent, REQUEST_CODE_UPDATE_NICK);
                 break;
             case R.id.my_item4:
                 startActivity(new Intent(getContext(), FeedBackActivity.class));
@@ -199,6 +200,19 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
                 default:break;
 
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_UPDATE_NICK) {
+            //刷新用户昵称
+            User user = BmobUser.getCurrentUser(User.class);
+            if (user.getNick() != null) {
+                tv_user_name.setText(user.getNick());
+            }
         }
     }
 }
