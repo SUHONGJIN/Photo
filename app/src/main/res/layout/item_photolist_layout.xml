@@ -20,7 +20,7 @@
                 android:id="@+id/iv_photo_image"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:src="@drawable/bg_everyday_image"
+                android:background="@color/gray_cc"
                 android:scaleType="centerCrop"/>
             <TextView
                 android:id="@+id/tv_photo_title"

@@ -25,7 +25,7 @@
     <color name="player_purple">#996699</color>
     <color name="player_blue2">#0099cc</color>
     <color name="scan_corner_color">#0effc2</color>
-    <color name="bg_color">#f4f4f4</color>
+    <color name="bg_color">#fafafa</color>
     <color name="contents_text">#ff000000</color>
     <color name="encode_view">#ffffffff</color>
     <color name="help_button_view">#ffcccccc</color>

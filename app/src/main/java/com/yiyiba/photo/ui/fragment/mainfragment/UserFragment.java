@@ -89,6 +89,12 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
         String url = "http://p1.qqyou.com/touxiang/UploadPic/2014-7/25/2014072522521653329.jpg";
 
+        //用户背景
+        Glide.with(getContext())
+                .load(url)
+                .bitmapTransform(new BlurTransformation(getContext(), 8, 6))
+                .into(mImage);
+
         //设置用户昵称
         if (BmobUser.isLogin()) {
             User user = BmobUser.getCurrentUser(User.class);
@@ -97,12 +103,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 my_item6.setVisibility(View.VISIBLE);
             }
 
-            //用户背景
-            Glide.with(getContext())
-                    .load(url)
-                    .bitmapTransform(new BlurTransformation(getContext(), 8, 6))
-                    .error(R.drawable.bg_image)
-                    .into(mImage);
             //用户头像
             Glide.with(getContext())
                     .load(url)

@@ -1,5 +1,6 @@
 package com.yiyiba.photo.ui.activity;
 
+import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -47,6 +48,7 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
     private String imageSavePath;
     //创建权限集合
     private List<String> permissionList = new ArrayList<>();
+    private TextView tv_title_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +81,13 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
         tv_progress_value = (TextView) findViewById(R.id.tv_progress_value);
         iv_share_image = (ImageView) findViewById(R.id.iv_share_image);
         iv_share_image.setOnClickListener(this);
+        tv_title_image = (TextView) findViewById(R.id.tv_title_image);
     }
 
     private void initData() {
         image_url = getIntent().getStringExtra("image_url");
         image_title = getIntent().getStringExtra("image_title");
+        tv_title_image.setText(image_title);
         Glide.with(ShowImageActivity.this).load(image_url).into(iv_show_image);
     }
 
@@ -111,7 +115,7 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.iv_share_image:
 
-                if (imageSavePath==null){
+                if (imageSavePath == null) {
                     final OptionMaterialDialog mMaterialDialog = new OptionMaterialDialog(ShowImageActivity.this);
                     mMaterialDialog.setTitle("小贴士：")
                             .setMessage("保存图片至本地才能分享哦")
@@ -134,7 +138,7 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
                                     })
                             .setCanceledOnTouchOutside(true)
                             .show();
-                }else {
+                } else {
                     showShare();
                 }
                 break;
@@ -162,7 +166,7 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
             public void done(String savePath, BmobException e) {
                 if (e == null) {
                     Log.i("bmoba", "下载成功,保存路径:" + savePath);
-                    imageSavePath=savePath;
+                    imageSavePath = savePath;
                     mProgress.setVisibility(View.GONE);
                     tv_progress_value.setVisibility(View.GONE);
                     iv_download_image.setVisibility(View.VISIBLE);
@@ -188,6 +192,7 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
 
         });
     }
+
     private void showShare() {
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
@@ -205,14 +210,15 @@ public class ShowImageActivity extends BaseActivity implements View.OnClickListe
         // 启动分享GUI
         oks.show(this);
     }
+
     //
     private void checkPermission() {
         //检查权限是否获取
-        if (ContextCompat.checkSelfPermission(ShowImageActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (ContextCompat.checkSelfPermission(ShowImageActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
-        if (ContextCompat.checkSelfPermission(ShowImageActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(android.Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (ContextCompat.checkSelfPermission(ShowImageActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
 
         if (!permissionList.isEmpty()) {

@@ -1,12 +1,22 @@
 package com.yiyiba.photo.ui.activity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.longsh.optionframelibrary.OptionBottomDialog;
@@ -14,12 +24,12 @@ import com.yiyiba.photo.R;
 import com.yiyiba.photo.bean.User;
 import com.yiyiba.photo.common.BaseActivity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobUser;
 import de.hdodenhof.circleimageview.CircleImageView;
-import es.dmoral.toasty.Toasty;
 
 public class UserInfoActivity extends BaseActivity {
 
@@ -28,7 +38,10 @@ public class UserInfoActivity extends BaseActivity {
     private CircleImageView cv_user_head;
     private RelativeLayout rl_modify_user_head;
     private TextView tv_username;
-
+    public static final int REQUEST_CAMERA = 1;
+    public static final int REQUEST_ALBUM = 2;
+    public static final int CAMERA_PERMISSION_CODE = 5;
+    private File mImageFile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +59,7 @@ public class UserInfoActivity extends BaseActivity {
         tv_username = (TextView) findViewById(R.id.tv_username);
 
         //用户头像
-        String url = "http://api.mmno.com/api/bing/img_1366";
+        String url = "http://p1.qqyou.com/touxiang/UploadPic/2014-7/25/2014072522521653329.jpg";
         Glide.with(UserInfoActivity.this).load(url).error(R.mipmap.icon_user_head).into(cv_user_head);
 
         //显示用户ID
@@ -72,10 +85,21 @@ public class UserInfoActivity extends BaseActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         switch (position) {
                             case 0:
-                                Toasty.info(UserInfoActivity.this, "拍照", Toast.LENGTH_SHORT, true).show();
+                                //Toasty.info(UserInfoActivity.this, "拍照", Toast.LENGTH_SHORT, true).show();
+                                //Android6.0以上要获取动态权限
+                                //先判断该页面是否已经授予拍照权限
+                                if (ContextCompat.checkSelfPermission(UserInfoActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                                    //获取拍照权限
+                                    ActivityCompat.requestPermissions(UserInfoActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+                                } else {
+                                    //拍照
+                                    selectCamera();
+                                }
                                 break;
                             case 1:
-                                Toasty.info(UserInfoActivity.this, "从相册选择", Toast.LENGTH_SHORT, true).show();
+                                //Toasty.info(UserInfoActivity.this, "从相册选择", Toast.LENGTH_SHORT, true).show();
+                                //调用相册
+                                selectAlbum();
                                 break;
                             default:
                                 break;
@@ -92,5 +116,37 @@ public class UserInfoActivity extends BaseActivity {
                 finish();
             }
         });
+    }
+
+    //选择相机
+    private void selectCamera() {
+        mImageFile = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Uri fileUri = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {  //如果是7.0以上，使用FileProvider，否则会报错
+            fileUri = FileProvider.getUriForFile(UserInfoActivity.this, "com.yiyiba.photo.fileprovider", mImageFile);
+        } else {
+            fileUri = Uri.fromFile(mImageFile);
+        }
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+        startActivityForResult(cameraIntent, REQUEST_CAMERA);
+    }
+
+    //选择相册
+    private void selectAlbum() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivityForResult(intent, REQUEST_ALBUM);
+    }
+
+    //处理权限请求响应
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case CAMERA_PERMISSION_CODE:
+                selectCamera();
+                break;
+        }
+
     }
 }

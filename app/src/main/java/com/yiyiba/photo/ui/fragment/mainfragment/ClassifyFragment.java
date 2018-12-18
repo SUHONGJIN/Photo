@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,7 @@ public class ClassifyFragment extends Fragment implements View.OnClickListener {
                     Toasty.error(getContext(), "获取图片失败", Toast.LENGTH_SHORT, true).show();
                     break;
                 case 1:
-                    Glide.with(getContext()).load(imgPath).into(iv_everyday_image);
+                    Glide.with(getContext()).load("http://api.mmno.com/api/bing/img_1366").into(iv_everyday_image);
                     tv_bing_title.setText(title);
                     tv_bing_description.setText(description);
                     break;
@@ -105,6 +106,7 @@ public class ClassifyFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Response response) throws IOException {
                 String data = response.body().string();
                 setData(data);
+                //Log.i("tag1",data);
             }
 
         });
@@ -164,7 +166,7 @@ public class ClassifyFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.classify_item2:
                 Intent intent2 = new Intent(getContext(),PhotoListActivity.class);
-                intent2.putExtra("title","儿童拍摄");
+                intent2.putExtra("title","随拍作品");
                 intent2.putExtra("tag","et");
                 startActivity(intent2);
                 break;
