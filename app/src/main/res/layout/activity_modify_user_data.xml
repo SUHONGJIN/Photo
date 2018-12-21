@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.yiyiba.photo.ui.activity.ModifyUserDataActivity">
+    tools:context="com.yiyibatuku.photo.ui.activity.ModifyUserDataActivity">
 
     <include layout="@layout/item_titlebar_layout" />
 

@@ -4,7 +4,7 @@ apply plugin: 'com.mob.sdk'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.yiyiba.photo"
+        applicationId "com.yiyibatuku.photo"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
@@ -18,7 +18,7 @@ android {
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
-                JPUSH_APPKEY : "b1c01d96752fb0dbfc785cb4", //JPush上注册的包名对应的appkey.
+                JPUSH_APPKEY : "c5033e3f5d0af358bf730f61", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }

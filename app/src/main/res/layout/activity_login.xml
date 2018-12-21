@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context="com.yiyiba.photo.ui.activity.LoginActivity">
+    tools:context="com.yiyibatuku.photo.ui.activity.LoginActivity">
 
     <include layout="@layout/item_titlebar_layout"/>
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.yiyiba.photo.ui.activity.FeedBackActivity">
+    tools:context="com.yiyibatuku.photo.ui.activity.FeedBackActivity">
 
     <include layout="@layout/item_titlebar_layout"/>
 
