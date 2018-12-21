@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yiyiba.photo.R;
 import com.yiyiba.photo.bean.ChildPhoto;
-import com.yiyiba.photo.bean.PetPhoto;
 import com.yiyiba.photo.ui.activity.ShowImageActivity;
 
 import java.util.ArrayList;

@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +29,6 @@ import com.yiyiba.photo.view.ItemView;
 import cn.bmob.v3.BmobUser;
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
-import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * Created by SuHongJin on 2018/12/9.
@@ -39,7 +37,6 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 public class UserFragment extends Fragment implements View.OnClickListener {
     private static final int TYPE_VALUE_NICK = 1;
     private static final int REQUEST_CODE_UPDATE_NICK = 2;
-    private ImageView mImage;
     private CircleImageView civ_head;
     private CircleImageView civ_user_head;
     private TextView tv_user_name;
@@ -49,6 +46,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private ItemView my_item4;
     private ItemView my_item5;
     private ItemView my_item6;
+    private TextView tv_user_name_id;
 
     @Nullable
     @Override
@@ -62,7 +60,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView(View view) {
-        mImage = (ImageView) view.findViewById(R.id.mImage);
         civ_head = (CircleImageView) view.findViewById(R.id.civ_user_head);
         civ_user_head = (CircleImageView) view.findViewById(R.id.civ_user_head);
         civ_user_head.setOnClickListener(this);
@@ -80,6 +77,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         my_item5.setOnClickListener(this);
         my_item6 = (ItemView) view.findViewById(R.id.my_item6);
         my_item6.setOnClickListener(this);
+        tv_user_name_id = (TextView) view.findViewById(R.id.tv_user_name_id);
     }
 
     /**
@@ -87,53 +85,54 @@ public class UserFragment extends Fragment implements View.OnClickListener {
      */
     private void initData() {
 
-        String url = "http://p1.qqyou.com/touxiang/UploadPic/2014-7/25/2014072522521653329.jpg";
+        String url = "http://b-ssl.duitang.com/uploads/item/201410/05/20141005152957_VEGPy.thumb.700_0.jpeg";
 
         //用户背景
-        Glide.with(getContext())
-                .load(url)
-                .bitmapTransform(new BlurTransformation(getContext(), 8, 6))
-                .into(mImage);
+//        Glide.with(getContext())
+//                .load(url)
+//                .bitmapTransform(new BlurTransformation(getContext(), 8, 6))
+//                .into(mImage);
+
 
         //设置用户昵称
         if (BmobUser.isLogin()) {
+
+            //用户头像
+            Glide.with(getContext()).load(url).error(R.mipmap.icon_user_head).into(civ_head);
+
             User user = BmobUser.getCurrentUser(User.class);
-            if (user.getNick()!=null){
+            if (user.getNick() != null) {
                 tv_user_name.setText(user.getNick());
                 my_item6.setVisibility(View.VISIBLE);
             }
-
-            //用户头像
-            Glide.with(getContext())
-                    .load(url)
-                    .error(R.mipmap.icon_user_head)
-                    .into(civ_head);
-
+            if (user.getUsername() != null) {
+                tv_user_name_id.setText("ID: "+user.getUsername());
+                tv_user_name_id.setVisibility(View.VISIBLE);
+            }
 
         } else {
             Toasty.info(getContext(), "尚未登录!", Toast.LENGTH_SHORT, true).show();
         }
-
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.civ_user_head:
-                if (!BmobUser.isLogin()){
+                if (!BmobUser.isLogin()) {
                     startActivity(new Intent(getContext(), LoginActivity.class));
-                }else {
+                } else {
                     startActivity(new Intent(getContext(), UserInfoActivity.class));
                 }
                 break;
             case R.id.tv_user_name:
-                if (!BmobUser.isLogin()){
+                if (!BmobUser.isLogin()) {
                     startActivity(new Intent(getContext(), LoginActivity.class));
                 } else {
                     Intent intent = new Intent(getContext(), ModifyUserDataActivity.class);
                     intent.putExtra("title", "修改昵称");
                     intent.putExtra("type", TYPE_VALUE_NICK);
-                    startActivityForResult(intent,REQUEST_CODE_UPDATE_NICK);
+                    startActivityForResult(intent, REQUEST_CODE_UPDATE_NICK);
                 }
                 break;
             case R.id.my_item1:
@@ -186,7 +185,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                         .show();
                 break;
 
-                default:break;
+            default:
+                break;
 
         }
     }

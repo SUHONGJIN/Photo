@@ -59,7 +59,7 @@ public class UserInfoActivity extends BaseActivity {
         tv_username = (TextView) findViewById(R.id.tv_username);
 
         //用户头像
-        String url = "http://p1.qqyou.com/touxiang/UploadPic/2014-7/25/2014072522521653329.jpg";
+        String url = "http://b-ssl.duitang.com/uploads/item/201410/05/20141005152957_VEGPy.thumb.700_0.jpeg";
         Glide.with(UserInfoActivity.this).load(url).error(R.mipmap.icon_user_head).into(cv_user_head);
 
         //显示用户ID

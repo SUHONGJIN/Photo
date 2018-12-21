@@ -9,26 +9,26 @@
    <RelativeLayout
        android:layout_width="match_parent"
        android:layout_height="50dp"
-       android:background="@color/ghostwhite">
+       android:background="@color/main_color">
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="作品欣赏"
-           android:textSize="17sp"
+           android:textSize="18sp"
            android:textStyle="bold"
            android:layout_centerInParent="true"
-           android:textColor="@color/black"/>
+           android:textColor="@color/white"/>
    </RelativeLayout>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/mTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabBackground="@color/ghostwhite"
+        app:tabBackground="@color/white"
         app:tabTextColor="@color/gray"
-        app:tabSelectedTextColor="@color/black2"
+        app:tabSelectedTextColor="@color/black"
         app:tabIndicatorHeight="2dp"
-        app:tabIndicatorColor="@color/colorPrimary">
+        app:tabIndicatorColor="@color/black">
     </android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager

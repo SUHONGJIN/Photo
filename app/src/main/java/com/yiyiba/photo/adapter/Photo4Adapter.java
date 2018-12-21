@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yiyiba.photo.R;
-import com.yiyiba.photo.bean.Photo3;
 import com.yiyiba.photo.bean.Photo4;
 import com.yiyiba.photo.ui.activity.ShowImageActivity;
 

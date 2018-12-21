@@ -71,7 +71,7 @@ public class SplashActivity extends Activity {
      */
     private void requestNetwork() {
 
-        String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=xg90080";
+        String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=xg90080";  //华为
         //String url = "http://www.jlckjz.com/back/get_init_data.php?type=android&appid=ttd000";  //已打开接口的id
         Map verif = new HashMap<String, String>();
 

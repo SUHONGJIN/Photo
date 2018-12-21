@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#fe7e01</color>-->
-    <!--<color name="colorPrimaryDark">#fe7e01</color>-->
-    <!--<color name="colorAccent">#99CC33</color>-->
-    <color name="colorPrimary">#4d4d4d</color>
-    <color name="colorPrimaryDark">#4d4d4d</color>
-    <color name="colorAccent">#4d4d4d</color>
+    <color name="colorPrimary">#FFC442</color>
+    <color name="colorPrimaryDark">#FFC442</color>
+    <color name="colorAccent">#FFC442</color>
+    <color name="main_color">#FFC442</color>
     <color name="dark">#707070</color>
     <color name="crime">#EE0000</color>
     <color name="android_layout_bg">#fafafa</color>
