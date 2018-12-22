@@ -1,10 +1,10 @@
 <resources>
 
-    <string name="app_name">118图库</string>
+    <string name="app_name">118图库宝典</string>
     <string name="item_name1">我的下载</string>
-    <string name="item_name2">喜欢的作品</string>
+    <string name="item_name2">喜欢作品</string>
     <string name="item_name3">我的设置</string>
-    <string name="item_name4">吐槽与建议</string>
+    <string name="item_name4">吐槽建议</string>
     <string name="item_name5">关于APP</string>
     <string name="item_name6">退出登录</string>
 
@@ -31,6 +31,6 @@
     <string name="classify_item5">摄影的表现形式是用平面影像表达思想和情感，就像作家用文字讲述故事，画家用画笔描绘生命的色彩，摄影师则是借助相机去捕捉生活中点点滴滴的美，通过艺术化的创作，表达心中的情感。任何一种艺术形式，当掌握了技术，再往深度层面走，都是人的主观表达。摄影作品只有当它承载了人类的精神和情感，才会充满灵性。</string>
 
 
-    <string name="about"> 《118图库》是一款欣赏摄影图片作品的一款APP，这里有极具个性的摄影作品，涉及生活摄影、旅游摄影、风光摄影等,用户可以下载保存图片和分享自己喜欢的图片给好友。还可以参考图库的作品学习到一些摄影技巧等......</string>
+    <string name="about"> 《118图库宝典》是一款欣赏摄影图片作品的一款APP，这里有极具个性的摄影作品，涉及生活摄影、旅游摄影、风光摄影等,用户可以下载保存图片和分享自己喜欢的图片给好友。还可以参考图库的作品学习到一些摄影技巧等......</string>
 
 </resources>
