@@ -71,7 +71,7 @@
             android:layout_marginTop="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
-            <com.yiyibaphoto.photo.view.ItemView
+            <com.yybtuku.photo.view.ItemView
                 android:id="@+id/my_item1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                 android:gravity="center"
                 app:setIcon="@mipmap/icon_downloads"
                 app:setText="@string/item_name1"/>
-            <com.yiyibaphoto.photo.view.ItemView
+            <com.yybtuku.photo.view.ItemView
                 android:id="@+id/my_item2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                 android:layout_marginLeft="10dp"
                 app:setText="@string/item_name2"/>
 
-            <com.yiyibaphoto.photo.view.ItemView
+            <com.yybtuku.photo.view.ItemView
                 android:id="@+id/my_item3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
             android:paddingRight="10dp"
             android:layout_marginTop="10dp">
 
-            <com.yiyibaphoto.photo.view.ItemView
+            <com.yybtuku.photo.view.ItemView
                 android:id="@+id/my_item4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                 android:gravity="center"
                 app:setIcon="@mipmap/icon_feedback"
                 app:setText="@string/item_name4"/>
-            <com.yiyibaphoto.photo.view.ItemView
+            <com.yybtuku.photo.view.ItemView
                 android:id="@+id/my_item5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
                 android:layout_marginLeft="10dp"
                 app:setText="@string/item_name5"/>
 
-            <com.yiyibaphoto.photo.view.ItemView
+            <com.yybtuku.photo.view.ItemView
                 android:id="@+id/my_item6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
